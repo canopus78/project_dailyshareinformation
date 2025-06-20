@@ -5,6 +5,14 @@ import json
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.image import MIMEImage
+from email.mime.base import MIMEBase
+from email import encoders
+import os
+from datetime import datetime
 
 class MarketFactorAnalyzer:
     def __init__(self, market_factors):
@@ -475,3 +483,102 @@ class DailyStockAnalysisAgent:
         for stock, details in recommendations.items():
             summary += f"  {stock}: {details['recommendation']} with confidence {details['confidence']}\n"
         return summary
+
+
+
+
+def send_email_with_report(report_generator, visualization_manager):
+    """
+    분석 리포트와 시각화 자료를 이메일로 전송하는 함수
+    """
+    gmail_user = os.environ.get('GMAIL_USERNAME')
+    gmail_password = os.environ.get('GMAIL_PASSWORD')
+    recipient_email = os.environ.get('RECIPIENT_EMAIL')
+
+    if not all([gmail_user, gmail_password, recipient_email]):
+        print("⚠️ 이메일 관련 환경 변수가 설정되지 않아 이메일을 발송할 수 없습니다.")
+        return
+
+    # 이메일 메시지 생성
+    msg = MIMEMultipart()
+    current_date = datetime.now().strftime('%Y-%m-%d')
+    msg['Subject'] = f"📊 일일 주식 분석 리포트 - {current_date}"
+    msg['From'] = gmail_user
+    msg['To'] = recipient_email
+
+    # HTML 본문 생성 (요약 정보 포함)
+    summary = report_generator.generate_executive_summary()
+    html_body = f"""
+    <html>
+    <body style="font-family: Arial, sans-serif;">
+        <h2 style="color: #2E86AB;">📊 일일 주식 분석 리포트</h2>
+        <h3 style="color: #333;">📅 {current_date}</h3>
+        <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; font-size: 14px; line-height: 1.6;">
+            <pre>{summary}</pre>
+        </div>
+        <p>상세 내용은 첨부된 리포트 파일과 차트 이미지를 확인해주세요.</p>
+        <hr>
+        <p style="color: #6c757d; font-size: 12px;">
+            <em>🤖 이 리포트는 GitHub Actions를 통해 자동으로 생성되었습니다.</em>
+        </p>
+    </body>
+    </html>
+    """
+    msg.attach(MimeText(html_body, 'html'))
+
+    # 첨부 파일 추가 (리포트, 차트)
+    attachments = [
+        report_generator.output_dir / 'daily_report.txt',
+        visualization_manager.output_dir / 'stock_price_performance.png',
+        visualization_manager.output_dir / 'market_sentiment_dashboard.png',
+        visualization_manager.output_dir / 'risk_return_scatter_plot.png',
+        visualization_manager.output_dir / 'sector_distribution_chart.png',
+    ]
+
+    for file_path in attachments:
+        try:
+            with open(file_path, 'rb') as attachment:
+                part = MIMEBase('application', 'octet-stream')
+                part.set_payload(attachment.read())
+            encoders.encode_base64(part)
+            part.add_header('Content-Disposition', f'attachment; filename= {os.path.basename(file_path)}')
+            msg.attach(part)
+        except FileNotFoundError:
+            print(f"경고: 첨부 파일을 찾을 수 없습니다 - {file_path}")
+
+
+    # Gmail SMTP 서버를 통해 이메일 발송
+    try:
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(gmail_user, gmail_password)
+        server.send_message(msg)
+        server.quit()
+        print('✅ 이메일이 성공적으로 발송되었습니다!')
+    except Exception as e:
+        print(f'❌ 이메일 발송 중 오류 발생: {e}')
+
+
+if __name__ == "__main__":
+    # 설정 파일 로드
+    config_path = 'config' # 파일 이름을 'config'로 가정
+    try:
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+        market_factors = config['market_factors']
+        stock_data = config['stock_data']
+
+        # 에이전트 실행
+        analysis_agent = DailyStockAnalysisAgent(market_factors, stock_data)
+        analysis_agent.run_daily_analysis()
+
+        # 이메일 발송
+        send_email_with_report(analysis_agent.report_generator, analysis_agent.visualization_manager)
+
+    except FileNotFoundError:
+        print(f"오류: 설정 파일 '{config_path}'을 찾을 수 없습니다.")
+    except json.JSONDecodeError:
+        print(f"오류: 설정 파일 '{config_path}'의 형식이 올바르지 않습니다.")
+    except Exception as e:
+        logging.error(f"스크립트 실행 중 치명적인 오류 발생: {e}")
+        print(f"스크립트 실행 중 치명적인 오류 발생: {e}")
