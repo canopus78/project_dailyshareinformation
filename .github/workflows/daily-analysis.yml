@@ -2,8 +2,8 @@ name: Daily Stock Analysis
 
 on:
   schedule:
-    - cron: '0 0 * * *'
-  workflow_dispatch:
+    - cron: '0 0 * * *' # 매일 자정(UTC)에 실행
+  workflow_dispatch: # 수동 실행 기능
 
 jobs:
   stock-analysis:
@@ -20,108 +20,19 @@ jobs:
     
     - name: Install dependencies
       run: |
-        pip install pandas numpy matplotlib seaborn requests yfinance
+        pip install pandas numpy matplotlib
+        # yfinance, seaborn, requests 등은 현재 코드에서 사용되지 않으므로 제외했습니다.
+        # 필요 시 다시 추가하세요.
         
-    - name: Run stock analysis and send email
+    - name: Install Korean font for Matplotlib
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y fonts-nanum*
+        
+    - name: Run daily stock analysis
       env:
         GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
         GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
         RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
       run: |
-        python3 << 'EOF'
-        import sys
-        import json
-        import smtplib
-        from email.mime.text import MimeText
-        from email.mime.multipart import MimeMultipart
-        import os
-        from datetime import datetime
-        
-        def run_analysis_and_send_email():
-            try:
-                # 주식 데이터
-                stocks = {
-                    'MSFT': {'price': 477.41, 'change': -0.97},
-                    'NVDA': {'price': 143.77, 'change': -1.15},
-                    'AAPL': {'price': 199.69, 'change': 0.74},
-                    'AMZN': {'price': 208.99, 'change': -2.09},
-                    'META': {'price': 682.23, 'change': -2.64},
-                    'GOOGL': {'price': 168.16, 'change': -3.33},
-                    'TSLA': {'price': 322.17, 'change': -1.72},
-                    'PLTR': {'price': 137.51, 'change': -2.27}
-                }
-                
-                # 리포트 생성
-                current_date = datetime.now().strftime('%Y년 %m월 %d일')
-                report_lines = [
-                    f"일일 주식 분석 리포트 - {current_date}",
-                    "",
-                    "주요 주식 현황:",
-                ]
-                
-                for symbol, data in stocks.items():
-                    direction = "상승" if data['change'] > 0 else "하락"
-                    line = f"{direction} {symbol}: ${data['price']:.2f} ({data['change']:+.2f}%)"
-                    report_lines.append(line)
-                
-                report_lines.extend([
-                    "",
-                    "투자 추천:",
-                    "• BUY: NVDA, PLTR (AI 섹터 성장 전망)",
-                    "• HOLD: MSFT, AAPL, AMZN (안정적 성장)",
-                    "• WATCH: META, GOOGL, TSLA (단기 변동성 주의)",
-                    "",
-                    "시장 전망:",
-                    "• 단기: 중립적 (Fed 정책 대기)",
-                    "• 장기: 긍정적 (AI 기술 발전)",
-                    "",
-                    "주요 리스크:",
-                    "• 지정학적 긴장",
-                    "• 인플레이션 재상승 가능성",
-                    "• 기술주 밸류에이션 부담",
-                    "",
-                    "자동 생성된 리포트입니다."
-                ])
-                
-                report = "\n".join(report_lines)
-                
-                # 이메일 발송
-                msg = MimeMultipart()
-                msg['From'] = os.environ['GMAIL_USERNAME']
-                msg['To'] = os.environ['RECIPIENT_EMAIL']
-                msg['Subject'] = f"일일 주식 분석 리포트 - {datetime.now().strftime('%Y-%m-%d')}"
-                
-                html_content = f"""
-                <html>
-                <body style="font-family: Arial, sans-serif;">
-                <h2 style="color: #2E86AB;">📊 일일 주식 분석 리포트</h2>
-                <h3>📅 {current_date}</h3>
-                <pre style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; font-size: 14px; line-height: 1.6;">
-{report}
-                </pre>
-                <hr style="margin: 30px 0;">
-                <p style="color: #6c757d; font-size: 12px;">
-                <em>🤖 이 리포트는 GitHub Actions를 통해 자동으로 생성되었습니다.</em><br>
-                <em>📧 문의사항이 있으시면 회신해주세요.</em>
-                </p>
-                </body>
-                </html>
-                """
-                
-                msg.attach(MimeText(html_content, 'html', 'utf-8'))
-                
-                # Gmail SMTP로 전송
-                server = smtplib.SMTP('smtp.gmail.com', 587)
-                server.starttls()
-                server.login(os.environ['GMAIL_USERNAME'], os.environ['GMAIL_PASSWORD'])
-                server.send_message(msg)
-                server.quit()
-                
-                print('✅ 이메일 전송 완료!')
-                
-            except Exception as e:
-                print(f'❌ 오류 발생: {e}')
-                raise
-        
-        run_analysis_and_send_email()
-        EOF
+        python3 daily_stock_analysis_agent.py
