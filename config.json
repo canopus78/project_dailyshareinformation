@@ -1,0 +1,19 @@
+{
+  "market_factors": {
+    "Fed Policy": "Federal Reserve held rates steady in June 2025, expects 2 more cuts this year",
+    "Inflation": "May 2025 CPI at 2.4% year-over-year",
+    "Geopolitical Tensions": "Geopolitical tensions in Middle East affecting markets",
+    "Earnings Growth": "Strong Q1 2025 earnings growth of 12.8%",
+    "AI Momentum": "AI sector momentum continuing"
+  },
+  "stock_data": {
+    "MSFT": 477.41,
+    "NVDA": 143.77,
+    "AAPL": 199.69,
+    "AMZN": 208.99,
+    "META": 682.23,
+    "GOOGL": 168.16,
+    "TSLA": 322.17,
+    "PLTR": 137.51
+  }
+}
