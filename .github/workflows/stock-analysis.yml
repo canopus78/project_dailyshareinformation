@@ -72,53 +72,52 @@ jobs:
           echo "API key found - ready to proceed"
         fi
     
-    - name: Create custom runner script
+    - name: Create runner script
+      shell: bash
       run: |
-        echo 'import os' > run_analysis.py
-        echo 'import sys' >> run_analysis.py
-        echo 'sys.path.append("src")' >> run_analysis.py
-        echo '' >> run_analysis.py
-        echo 'def main():' >> run_analysis.py
-        echo '    try:' >> run_analysis.py
-        echo '        from config.settings import settings' >> run_analysis.py
-        echo '        from src.analyzer import YahooFinanceNewsAnalyzer' >> run_analysis.py
-        echo '        from src.utils import setup_logging' >> run_analysis.py
-        echo '        ' >> run_analysis.py
-        echo '        setup_logging()' >> run_analysis.py
-        echo '        ' >> run_analysis.py
-        echo '        # Get parameters from environment' >> run_analysis.py
-        echo '        tickers_input = os.getenv("INPUT_TICKERS", "AAPL,GOOGL,MSFT")' >> run_analysis.py
-        echo '        max_stocks = int(os.getenv("INPUT_MAX_STOCKS", "3"))' >> run_analysis.py
-        echo '        mode = os.getenv("INPUT_MODE", "standard")' >> run_analysis.py
-        echo '        ' >> run_analysis.py
-        echo '        # Process tickers' >> run_analysis.py
-        echo '        tickers = [t.strip().upper() for t in tickers_input.split(",")]' >> run_analysis.py
-        echo '        tickers = tickers[:max_stocks]' >> run_analysis.py
-        echo '        ' >> run_analysis.py
-        echo '        print(f"Analyzing tickers: {tickers}")' >> run_analysis.py
-        echo '        print(f"Mode: {mode}")' >> run_analysis.py
-        echo '        ' >> run_analysis.py
-        echo '        # Adjust settings based on mode' >> run_analysis.py
-        echo '        if mode == "quick":' >> run_analysis.py
-        echo '            settings.MAX_TOKENS = 1500' >> run_analysis.py
-        echo '        elif mode == "detailed":' >> run_analysis.py
-        echo '            settings.MAX_TOKENS = 3000' >> run_analysis.py
-        echo '        ' >> run_analysis.py
-        echo '        # Run analysis' >> run_analysis.py
-        echo '        analyzer = YahooFinanceNewsAnalyzer()' >> run_analysis.py
-        echo '        results = analyzer.run_complete_analysis(tickers)' >> run_analysis.py
-        echo '        ' >> run_analysis.py
-        echo '        print("Analysis completed successfully!")' >> run_analysis.py
-        echo '        print(f"Analyzed {len(results[\'individual_analyses\'])} stocks")' >> run_analysis.py
-        echo '        ' >> run_analysis.py
-        echo '    except Exception as e:' >> run_analysis.py
-        echo '        print(f"Error: {str(e)}")' >> run_analysis.py
-        echo '        import traceback' >> run_analysis.py
-        echo '        traceback.print_exc()' >> run_analysis.py
-        echo '        sys.exit(1)' >> run_analysis.py
-        echo '' >> run_analysis.py
-        echo 'if __name__ == "__main__":' >> run_analysis.py
-        echo '    main()' >> run_analysis.py
+        # heredoc 로 Python 파일을 한 번에 생성
+        cat <<'PY' > run_analysis.py
+        import os, sys, time
+        from datetime import datetime
+
+        # 프로젝트 모듈 경로 추가
+        sys.path.append("src")
+
+        from config.settings import settings
+        from src.analyzer import YahooFinanceNewsAnalyzer
+        from src.utils import setup_logging
+
+        def main():
+            setup_logging()
+
+            tickers_input = os.getenv("INPUT_TICKERS", "AAPL,GOOGL,MSFT")
+            max_stocks    = int(os.getenv("INPUT_MAX_STOCKS", "3"))
+            mode          = os.getenv("INPUT_MODE", "standard")
+
+            tickers = [t.strip().upper() for t in tickers_input.split(",") if t.strip()]
+            tickers = tickers[:max_stocks]
+
+            print(f">>> Tickers: {tickers}")
+            print(f">>> Mode   : {mode}")
+
+            # 모드에 따라 토큰/temperature 조정
+            if mode == "quick":
+                settings.MAX_TOKENS  = 1500
+                settings.TEMPERATURE = 0.5
+            elif mode == "detailed":
+                settings.MAX_TOKENS  = 3000
+                settings.TEMPERATURE = 0.2
+
+            analyzer = YahooFinanceNewsAnalyzer()
+            results  = analyzer.run_complete_analysis(tickers)
+
+            analyzed_cnt = len(results["individual_analyses"])
+            print(f"### Analyzed {analyzed_cnt} stocks ###")
+
+        if __name__ == "__main__":
+            main()
+        PY
+        
     
     - name: Run stock analysis
       env:
