@@ -1,4 +1,3 @@
-
 import logging
 from pathlib import Path
 import json
@@ -225,7 +224,7 @@ class ReportGenerator:
         self.market_analyzer = market_analyzer
         self.stock_analyzer = stock_analyzer
         self.recommendation_engine = recommendation_engine
-        self.output_dir = Path('reports')
+        self.output_dir = Path('reports')  # 상대 경로로 수정
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
     def generate_executive_summary(self):
@@ -306,9 +305,9 @@ class VisualizationManager:
         self.stock_analyzer = stock_analyzer
         self.market_analyzer = market_analyzer
         self.recommendation_engine = recommendation_engine
-        self.output_dir = Path('visualizations')
+        self.output_dir = Path('visualizations') # 상대 경로로 수정
         self.output_dir.mkdir(parents=True, exist_ok=True)
-        plt.rcParams['font.family'] = ['Noto Sans CJK JP']
+        plt.rcParams['font.family'] = ['Noto Sans CJK JP', 'NanumGothic'] # 나눔고딕 폰트 추가
         plt.rcParams['figure.dpi'] = 100
         plt.rcParams['savefig.dpi'] = 300
 
@@ -347,7 +346,8 @@ class VisualizationManager:
         analysis_results = self.stock_analyzer.analyze_stocks()
         stocks = list(analysis_results.keys())
         risks = [analysis_results[stock]['risk_assessment']['volatility'] for stock in stocks]
-        returns = [analysis_results[stock]['financial_metrics']['earnings_growth'] for stock in stocks]
+        # 'earnings_growth'를 'growth'로 바꾸고, .get()을 사용해 키가 없을 경우 기본값 0을 반환하도록 수정
+        returns = [analysis_results[stock]['financial_metrics'].get('growth', 0) for stock in stocks]
 
         plt.figure(figsize=(10, 6))
         plt.scatter(risks, returns, color='orange')
@@ -419,7 +419,7 @@ class DailyStockAnalysisAgent:
         self.setup_logging()
 
     def setup_logging(self):
-        logging.basicConfig(filename='analysis.log',
+        logging.basicConfig(filename='analysis.log', # 상대 경로로 수정
                             level=logging.INFO,
                             format='%(asctime)s - %(levelname)s - %(message)s')
         logging.info("DailyStockAnalysisAgent initialized.")
@@ -475,6 +475,7 @@ class DailyStockAnalysisAgent:
         except Exception as e:
             logging.error(f"Error during daily analysis: {e}")
             print(f"An error occurred during the analysis: {e}")
+            raise # 에러를 다시 발생시켜서 GitHub Actions가 실패로 인식하게 함
 
     def generate_summary(self, market_analysis, stock_analysis, recommendations):
         summary = "Daily Stock Market Analysis Summary:\n"
@@ -483,9 +484,6 @@ class DailyStockAnalysisAgent:
         for stock, details in recommendations.items():
             summary += f"  {stock}: {details['recommendation']} with confidence {details['confidence']}\n"
         return summary
-
-
-
 
 def send_email_with_report(report_generator, visualization_manager):
     """
@@ -538,11 +536,14 @@ def send_email_with_report(report_generator, visualization_manager):
     for file_path in attachments:
         try:
             with open(file_path, 'rb') as attachment:
-                part = MIMEBase('application', 'octet-stream')
-                part.set_payload(attachment.read())
-            encoders.encode_base64(part)
-            part.add_header('Content-Disposition', f'attachment; filename= {os.path.basename(file_path)}')
-            msg.attach(part)
+                if file_path.suffix == '.png':
+                    part = MIMEImage(attachment.read(), name=os.path.basename(file_path))
+                else:
+                    part = MIMEBase('application', 'octet-stream')
+                    part.set_payload(attachment.read())
+                    encoders.encode_base64(part)
+                part.add_header('Content-Disposition', f'attachment; filename= {os.path.basename(file_path)}')
+                msg.attach(part)
         except FileNotFoundError:
             print(f"경고: 첨부 파일을 찾을 수 없습니다 - {file_path}")
 
@@ -557,12 +558,12 @@ def send_email_with_report(report_generator, visualization_manager):
         print('✅ 이메일이 성공적으로 발송되었습니다!')
     except Exception as e:
         print(f'❌ 이메일 발송 중 오류 발생: {e}')
-
+        raise
 
 if __name__ == "__main__":
-    # 설정 파일 로드
-    config_path = 'config.json' # 파일 이름을 'config'로 가정
     try:
+        # 설정 파일 로드
+        config_path = 'config.json' # '.json' 확장자 포함
         with open(config_path, 'r') as f:
             config = json.load(f)
         market_factors = config['market_factors']
@@ -577,8 +578,11 @@ if __name__ == "__main__":
 
     except FileNotFoundError:
         print(f"오류: 설정 파일 '{config_path}'을 찾을 수 없습니다.")
+        raise
     except json.JSONDecodeError:
         print(f"오류: 설정 파일 '{config_path}'의 형식이 올바르지 않습니다.")
+        raise
     except Exception as e:
         logging.error(f"스크립트 실행 중 치명적인 오류 발생: {e}")
         print(f"스크립트 실행 중 치명적인 오류 발생: {e}")
+        raise
