@@ -1,0 +1,2148 @@
+{
+  "analysis_timestamp": "2025-06-21T23:27:16.699097",
+  "tickers_analyzed": [
+    "AAPL",
+    "GOOGL",
+    "MSFT"
+  ],
+  "individual_analyses": [
+    {
+      "ticker": "AAPL",
+      "company_name": "Apple Inc.",
+      "analysis_date": "2025-06-21T23:25:29.636014",
+      "raw_analysis": "Given the lack of specific recent news items and some fundamental data in the provided information, I will proceed with a comprehensive analysis based on the available data and general knowledge of Apple Inc. (AAPL) as of my last update in December 2023. Please note that the actual investment decision should also consider the latest news, market trends, and comprehensive financial data.\n\n### 1. NEWS SUMMARY:\nWithout specific recent news items, we can infer that Apple, as a leading technology company, continues to be in the spotlight due to its product launches, financial performance, regulatory scrutiny, and market expansion efforts. Apple's news cycle often includes updates on iPhone sales, service segment growth, legal challenges, and technological innovations.\n\n### 2. MARKET SENTIMENT:\nGiven Apple's position as a tech giant and a component of the Dow Jones Industrial Average, market sentiment towards AAPL is generally positive, reflecting its strong brand, loyal customer base, and solid financial performance. However, sentiment can be affected by broader market trends, regulatory news, and global economic conditions.\n\n### 3. TECHNICAL ANALYSIS:\n- **Current Price vs. SMA20 and SMA50**: The price being slightly above the SMA20 but below the SMA50 suggests a neutral to slightly bearish short-term sentiment. The stock is in a consolidation phase.\n- **RSI (50.26)**: Indicates a neutral market condition for AAPL. The stock is neither overbought nor oversold.\n- **MACD (-1.484)**: The negative MACD indicates bearish momentum in the short term.\n- **Bollinger Band Position (0.596)**: This suggests that the stock price is closer to the upper band, indicating that it might be relatively high within its recent range.\n- **Volatility (21.95%)**: High volatility indicates significant price movement, which could mean both risk and opportunity.\n\n### 4. FUNDAMENTAL ANALYSIS:\n- **P/E Ratio (31.36)** and **Forward P/E (24.19)**: These ratios suggest that AAPL is valued at a premium compared to the market average, reflecting high expectations for future earnings growth.\n- **Price to Book (44.96)**: A very high P/B ratio indicates the market is valuing the company's assets quite optimistically, which is common for tech companies with significant intangible assets.\n- **ROE and Profit Margin**: Not provided, but historically, Apple has demonstrated strong profitability and efficient use of equity.\n\n### 5. RISK ASSESSMENT:\nKey risks include market saturation in key product lines, regulatory challenges, global economic downturns affecting consumer spending, and competition from other tech giants. Supply chain disruptions could also impact product availability and costs.\n\n### 6. INVESTMENT RECOMMENDATION:\nGiven the mixed signals from technical indicators and the premium valuation reflected in the P/E and P/B ratios, my recommendation is a **Hold**. Investors should maintain their positions but be cautious about adding more until a clearer bullish signal emerges. A target price range is challenging to provide without current profit margins or revenue growth data, but investors should watch for a move towards the SMA50 as a potential buying opportunity. The time horizon for this recommendation is the next 3-6 months.\n\n### 7. KEY CATALYSTS:\n- **Product Launches**: New product announcements, especially in the iPhone, iPad, and services segments, can significantly impact the stock price.\n- **Earnings Reports**: Quarterly financial results will provide insight into the company's growth trajectory and profitability, affecting stock movement.\n- **Regulatory News**: Changes in regulatory landscapes, especially in the U.S. and China, could impact Apple's operations and market access.\n\nThis analysis is based on available data and general market knowledge of Apple Inc. Investors should consider this as one part of their broader research, keeping an eye on the latest financial reports, news updates, and market trends before making investment decisions.",
+      "structured_analysis": {
+        "news_summary": "Without specific recent news items, we can infer that Apple, as a leading technology company, continues to be in the spotlight due to its product launches, financial performance, regulatory scrutiny, and market expansion efforts. Apple's news cycle often includes updates on iPhone sales, service segment growth, legal challenges, and technological innovations.",
+        "market_sentiment": "Given Apple's position as a tech giant and a component of the Dow Jones Industrial Average, market sentiment towards AAPL is generally positive, reflecting its strong brand, loyal customer base, and solid financial performance. However, sentiment can be affected by broader market trends, regulatory news, and global economic conditions.",
+        "technical_analysis": "- **Current Price vs. SMA20 and SMA50**: The price being slightly above the SMA20 but below the SMA50 suggests a neutral to slightly bearish short-term sentiment. The stock is in a consolidation phase.\n- **RSI (50.26)**: Indicates a neutral market condition for AAPL. The stock is neither overbought nor oversold.\n- **MACD (-1.484)**: The negative MACD indicates bearish momentum in the short term.\n- **Bollinger Band Position (0.596)**: This suggests that the stock price is closer to the upper band, indicating that it might be relatively high within its recent range.\n- **Volatility (21.95%)**: High volatility indicates significant price movement, which could mean both risk and opportunity.",
+        "fundamental_analysis": "- **P/E Ratio (31.36)** and **Forward P/E (24.19)**: These ratios suggest that AAPL is valued at a premium compared to the market average, reflecting high expectations for future earnings growth.\n- **Price to Book (44.96)**: A very high P/B ratio indicates the market is valuing the company's assets quite optimistically, which is common for tech companies with significant intangible assets.\n- **ROE and Profit Margin**: Not provided, but historically, Apple has demonstrated strong profitability and efficient use of equity.",
+        "risk_assessment": "Key risks include market saturation in key product lines, regulatory challenges, global economic downturns affecting consumer spending, and competition from other tech giants. Supply chain disruptions could also impact product availability and costs.",
+        "investment_recommendation": "Given the mixed signals from technical indicators and the premium valuation reflected in the P/E and P/B ratios, my recommendation is a **Hold**. Investors should maintain their positions but be cautious about adding more until a clearer bullish signal emerges. A target price range is challenging to provide without current profit margins or revenue growth data, but investors should watch for a move towards the SMA50 as a potential buying opportunity. The time horizon for this recommendation is the next 3-6 months.",
+        "key_catalysts": "- **Product Launches**: New product announcements, especially in the iPhone, iPad, and services segments, can significantly impact the stock price.\n- **Earnings Reports**: Quarterly financial results will provide insight into the company's growth trajectory and profitability, affecting stock movement.\n- **Regulatory News**: Changes in regulatory landscapes, especially in the U.S. and China, could impact Apple's operations and market access.\n\nThis analysis is based on available data and general market knowledge of Apple Inc. Investors should consider this as one part of their broader research, keeping an eye on the latest financial reports, news updates, and market trends before making investment decisions."
+      },
+      "tokens_used": 1233,
+      "model_used": "gpt-4-turbo-preview"
+    },
+    {
+      "ticker": "GOOGL",
+      "company_name": "Alphabet Inc.",
+      "analysis_date": "2025-06-21T23:26:14.724076",
+      "raw_analysis": "Given the lack of specific recent news content and certain fundamental data such as Return on Equity (ROE), Profit Margin, and Revenue Growth, this analysis will leverage the provided technical indicators and available fundamental data to offer a comprehensive view of Alphabet Inc. (GOOGL). This analysis will also draw on general knowledge of Alphabet's market position, competitive landscape, and potential industry trends up to the current date.\n\n1. **NEWS SUMMARY:**\n   Without specific recent news items, we can infer that Alphabet, like many tech giants, is likely navigating challenges such as regulatory scrutiny, advertising market fluctuations, and technological innovation pressures. Alphabet's diverse portfolio, including Google Search, YouTube, and Cloud services, typically generates a mix of operational highlights and concerns, from antitrust investigations to advancements in AI and cloud computing.\n\n2. **MARKET SENTIMENT:**\n   The absence of specific news items makes it difficult to gauge immediate market sentiment. However, Alphabet's position as a leading tech company generally garners positive long-term sentiment due to its dominant market share in search and online advertising, significant investments in cloud computing, and ongoing innovations in areas like artificial intelligence and autonomous vehicles.\n\n3. **TECHNICAL ANALYSIS:**\n   - **Current Price vs. SMAs:** The stock is currently trading below its 20-day SMA but above its 50-day SMA, indicating mixed short-term sentiment but a generally positive outlook in the medium term.\n   - **RSI:** At approximately 42.88, the RSI suggests the stock is neither overbought nor oversold, presenting a neutral position that could favor either direction.\n   - **MACD:** A positive MACD indicates bullish momentum, suggesting that the stock might be in an uptrend.\n   - **Bollinger Bands:** The position within the Bollinger Bands suggests moderate volatility, with the stock not hitting extremes of overbought or oversold territory.\n   - **Volatility:** The high volatility indicates significant price movement, which could present opportunities for traders but might be a concern for long-term investors seeking stability.\n\n4. **FUNDAMENTAL ANALYSIS:**\n   - **P/E Ratio:** With a P/E ratio of 18.58, Alphabet is valued reasonably within the tech sector, suggesting it is not overly expensive given its earnings.\n   - **Forward P/E:** The forward P/E is nearly identical to the current P/E, indicating expectations of steady earnings growth.\n   - **Price to Book:** A ratio of 5.87 suggests a premium valuation, which is common for high-growth tech companies with significant intangible assets.\n   - The absence of ROE, Profit Margin, and Revenue Growth metrics limits a full assessment, but Alphabet's historical performance has demonstrated strong profitability and growth, driven by its core advertising business and growing cloud segment.\n\n5. **RISK ASSESSMENT:**\n   Key risks include regulatory challenges, competition in digital advertising, cloud computing, and other tech verticals, potential saturation in core markets, and the execution risk of diversifying revenue streams.\n\n6. **INVESTMENT RECOMMENDATION:**\n   **Hold** with a potential upgrade to **Buy** on dips or if upcoming earnings demonstrate stronger-than-expected growth or profitability improvements. Target price range: $180-$200 within a 12-18 month time horizon. This recommendation considers Alphabet's solid market position, reasonable valuation, and growth prospects, balanced against the high volatility and regulatory risks.\n\n7. **KEY CATALYSTS:**\n   - **Earnings Reports:** Stronger-than-expected earnings could positively impact the stock price.\n   - **Regulatory Developments:** Resolution or escalation of regulatory issues could significantly affect investor sentiment.\n   - **Innovation and Market Expansion:** Breakthroughs in AI, cloud computing, or successful expansion into new markets could serve as positive catalysts.\n   - **Competitive Landscape Changes:** Shifts in digital advertising or cloud computing markets could impact Alphabet's growth trajectory.\n\nInvestors should monitor these areas closely, as significant developments could necessitate a reassessment of the investment thesis.",
+      "structured_analysis": {
+        "news_summary": "Without specific recent news items, we can infer that Alphabet, like many tech giants, is likely navigating challenges such as regulatory scrutiny, advertising market fluctuations, and technological innovation pressures. Alphabet's diverse portfolio, including Google Search, YouTube, and Cloud services, typically generates a mix of operational highlights and concerns, from antitrust investigations to advancements in AI and cloud computing.",
+        "market_sentiment": "The absence of specific news items makes it difficult to gauge immediate market sentiment. However, Alphabet's position as a leading tech company generally garners positive long-term sentiment due to its dominant market share in search and online advertising, significant investments in cloud computing, and ongoing innovations in areas like artificial intelligence and autonomous vehicles.",
+        "technical_analysis": "- **Current Price vs. SMAs:** The stock is currently trading below its 20-day SMA but above its 50-day SMA, indicating mixed short-term sentiment but a generally positive outlook in the medium term.\n- **RSI:** At approximately 42.88, the RSI suggests the stock is neither overbought nor oversold, presenting a neutral position that could favor either direction.\n- **MACD:** A positive MACD indicates bullish momentum, suggesting that the stock might be in an uptrend.\n- **Bollinger Bands:** The position within the Bollinger Bands suggests moderate volatility, with the stock not hitting extremes of overbought or oversold territory.\n- **Volatility:** The high volatility indicates significant price movement, which could present opportunities for traders but might be a concern for long-term investors seeking stability.",
+        "fundamental_analysis": "- **P/E Ratio:** With a P/E ratio of 18.58, Alphabet is valued reasonably within the tech sector, suggesting it is not overly expensive given its earnings.\n- **Forward P/E:** The forward P/E is nearly identical to the current P/E, indicating expectations of steady earnings growth.\n- **Price to Book:** A ratio of 5.87 suggests a premium valuation, which is common for high-growth tech companies with significant intangible assets.\n- The absence of ROE, Profit Margin, and Revenue Growth metrics limits a full assessment, but Alphabet's historical performance has demonstrated strong profitability and growth, driven by its core advertising business and growing cloud segment.",
+        "risk_assessment": "Key risks include regulatory challenges, competition in digital advertising, cloud computing, and other tech verticals, potential saturation in core markets, and the execution risk of diversifying revenue streams.",
+        "investment_recommendation": "**Hold** with a potential upgrade to **Buy** on dips or if upcoming earnings demonstrate stronger-than-expected growth or profitability improvements. Target price range: $180-$200 within a 12-18 month time horizon. This recommendation considers Alphabet's solid market position, reasonable valuation, and growth prospects, balanced against the high volatility and regulatory risks.",
+        "key_catalysts": "- **Earnings Reports:** Stronger-than-expected earnings could positively impact the stock price.\n- **Regulatory Developments:** Resolution or escalation of regulatory issues could significantly affect investor sentiment.\n- **Innovation and Market Expansion:** Breakthroughs in AI, cloud computing, or successful expansion into new markets could serve as positive catalysts.\n- **Competitive Landscape Changes:** Shifts in digital advertising or cloud computing markets could impact Alphabet's growth trajectory.\n\nInvestors should monitor these areas closely, as significant developments could necessitate a reassessment of the investment thesis."
+      },
+      "tokens_used": 1257,
+      "model_used": "gpt-4-turbo-preview"
+    },
+    {
+      "ticker": "MSFT",
+      "company_name": "Microsoft Corporation",
+      "analysis_date": "2025-06-21T23:26:44.357373",
+      "raw_analysis": "Given the absence of specific recent news items in the provided data, I will proceed with the analysis based on the technical indicators, fundamental data, and general knowledge of Microsoft Corporation (MSFT) up to my last update in December 2023.\n\n### 1. NEWS SUMMARY:\nWithout specific recent news items, it's challenging to summarize key themes and sentiment accurately. However, Microsoft, being a leading technology company, typically sees news related to product launches, quarterly earnings reports, strategic acquisitions, and partnerships that can significantly impact its stock price. Investors should stay attuned to developments in cloud computing, gaming (Xbox), LinkedIn, and potential regulatory challenges, as these areas are crucial for Microsoft's growth.\n\n### 2. MARKET SENTIMENT:\nBased on the technical indicators provided, market sentiment towards Microsoft appears positive. A high RSI (73.4) suggests that the stock might be considered overbought, which often reflects strong investor confidence or bullish sentiment in the short term. However, this could also indicate a potential pullback if investors start to take profits.\n\n### 3. TECHNICAL ANALYSIS:\n- **Current Price vs. SMA20 and SMA50**: Microsoft's price being above both the 20-day and 50-day Simple Moving Averages (SMA) by 2.07% and 9.81%, respectively, indicates a strong short-term and medium-term uptrend.\n- **RSI**: At 73.4, the Relative Strength Index suggests the stock is in the overbought territory, which could precede a price correction.\n- **MACD**: A MACD of 11.1 indicates strong bullish momentum.\n- **Bollinger Bands**: The position within the Bollinger Bands suggests the stock is trading near the upper range, supporting the overbought condition indicated by the RSI.\n- **Volatility**: A volatility of 12.4% is relatively high, indicating significant price movement and potentially higher risk.\n\n### 4. FUNDAMENTAL ANALYSIS:\n- **Valuation Metrics**: A P/E ratio of 36.89 and a forward P/E of 31.93 suggest that Microsoft is valued at a premium compared to the broader market, likely reflecting its strong market position and growth prospects. The price to book ratio of 11.03 further underscores this premium valuation.\n- **Profitability**: An ROE of 33.61% and a profit margin of 35.789% are indicative of Microsoft's strong profitability and operational efficiency.\n- **Growth**: Revenue growth of 13.3% is robust, especially for a company of Microsoft's size, highlighting its ability to expand its business in a competitive landscape.\n\n### 5. RISK ASSESSMENT:\n- **Valuation Risk**: The high valuation metrics could make the stock vulnerable to market corrections or shifts in investor sentiment.\n- **Regulatory Risk**: As a leading tech company, Microsoft faces ongoing regulatory scrutiny, which could impact its operations and stock price.\n- **Market Position**: While Microsoft has a strong market position, it operates in highly competitive sectors. Any loss of market share, especially in cloud computing or software, could affect its financials.\n\n### 6. INVESTMENT RECOMMENDATION:\nGiven the strong fundamental performance but considering the high valuation and overbought technical indicators, my recommendation is **Hold**. Investors should wait for a better entry point, particularly if a price correction occurs due to the overbought condition. \n\n### 7. KEY CATALYSTS:\n- **Earnings Reports**: Quarterly earnings will be crucial, especially any updates on cloud computing growth, profit margins, and revenue growth.\n- **Regulatory Developments**: Changes in regulatory landscapes, especially in the U.S. and Europe, could impact Microsoft's operations and stock price.\n- **Technological Innovations**: Announcements related to product launches or advancements in AI, cloud computing, and gaming could serve as positive catalysts.\n\n**Target Price Range**: Given the current analysis, establishing a specific target price range is challenging without a recent pullback or correction. However, investors should closely monitor the $450-$470 range for potential entry points, considering the stock's volatility and current overbought status.\n\n**Time Horizon**: Medium to Long Term (1-3 years), given Microsoft's strong market position and growth prospects in cloud computing and other sectors.",
+      "structured_analysis": {
+        "news_summary": "Without specific recent news items, it's challenging to summarize key themes and sentiment accurately. However, Microsoft, being a leading technology company, typically sees news related to product launches, quarterly earnings reports, strategic acquisitions, and partnerships that can significantly impact its stock price. Investors should stay attuned to developments in cloud computing, gaming (Xbox), LinkedIn, and potential regulatory challenges, as these areas are crucial for Microsoft's growth.",
+        "market_sentiment": "Based on the technical indicators provided, market sentiment towards Microsoft appears positive. A high RSI (73.4) suggests that the stock might be considered overbought, which often reflects strong investor confidence or bullish sentiment in the short term. However, this could also indicate a potential pullback if investors start to take profits.",
+        "technical_analysis": "- **Current Price vs. SMA20 and SMA50**: Microsoft's price being above both the 20-day and 50-day Simple Moving Averages (SMA) by 2.07% and 9.81%, respectively, indicates a strong short-term and medium-term uptrend.\n- **RSI**: At 73.4, the Relative Strength Index suggests the stock is in the overbought territory, which could precede a price correction.\n- **MACD**: A MACD of 11.1 indicates strong bullish momentum.\n- **Bollinger Bands**: The position within the Bollinger Bands suggests the stock is trading near the upper range, supporting the overbought condition indicated by the RSI.\n- **Volatility**: A volatility of 12.4% is relatively high, indicating significant price movement and potentially higher risk.",
+        "fundamental_analysis": "- **Valuation Metrics**: A P/E ratio of 36.89 and a forward P/E of 31.93 suggest that Microsoft is valued at a premium compared to the broader market, likely reflecting its strong market position and growth prospects. The price to book ratio of 11.03 further underscores this premium valuation.\n- **Profitability**: An ROE of 33.61% and a profit margin of 35.789% are indicative of Microsoft's strong profitability and operational efficiency.\n- **Growth**: Revenue growth of 13.3% is robust, especially for a company of Microsoft's size, highlighting its ability to expand its business in a competitive landscape.",
+        "risk_assessment": "- **Valuation Risk**: The high valuation metrics could make the stock vulnerable to market corrections or shifts in investor sentiment.\n- **Regulatory Risk**: As a leading tech company, Microsoft faces ongoing regulatory scrutiny, which could impact its operations and stock price.\n- **Market Position**: While Microsoft has a strong market position, it operates in highly competitive sectors. Any loss of market share, especially in cloud computing or software, could affect its financials.",
+        "investment_recommendation": "Given the strong fundamental performance but considering the high valuation and overbought technical indicators, my recommendation is **Hold**. Investors should wait for a better entry point, particularly if a price correction occurs due to the overbought condition.",
+        "key_catalysts": "- **Earnings Reports**: Quarterly earnings will be crucial, especially any updates on cloud computing growth, profit margins, and revenue growth.\n- **Regulatory Developments**: Changes in regulatory landscapes, especially in the U.S. and Europe, could impact Microsoft's operations and stock price.\n- **Technological Innovations**: Announcements related to product launches or advancements in AI, cloud computing, and gaming could serve as positive catalysts.\n\n**Target Price Range**: Given the current analysis, establishing a specific target price range is challenging without a recent pullback or correction. However, investors should closely monitor the $450-$470 range for potential entry points, considering the stock's volatility and current overbought status.\n\n**Time Horizon**: Medium to Long Term (1-3 years), given Microsoft's strong market position and growth prospects in cloud computing and other sectors."
+      },
+      "tokens_used": 1327,
+      "model_used": "gpt-4-turbo-preview"
+    }
+  ],
+  "portfolio_analysis": {
+    "analysis_date": "2025-06-21T23:27:16.699080",
+    "portfolio_analysis": "### OVERALL MARKET SENTIMENT:\n\nThe general market sentiment, as inferred from the analyses of AAPL, GOOGL, and MSFT, appears cautiously optimistic but leans towards a conservative stance. The recommendations to hold positions across these major tech giants suggest a market at or near valuation peaks, with investors advised to seek better entry points or await clearer signals of growth and profitability. This cautious optimism reflects a market aware of both the growth potential and the risks involved in these high-valuation tech stocks.\n\n### SECTOR TRENDS:\n\nA clear sector-specific trend is the emphasis on regulatory challenges and market saturation risks within the technology sector. These companies face similar challenges, including competition across various tech verticals (digital advertising, cloud computing, etc.), suggesting a broader sector trend of maturation and the need for diversification of revenue streams. The focus on supply chain disruptions for AAPL also highlights the operational challenges that can impact the sector.\n\n### PORTFOLIO DIVERSIFICATION:\n\nGiven the recommendations and risks outlined, a portfolio overly concentrated in high-valuation tech stocks may be exposed to sector-specific risks and market corrections. Diversification into other sectors or into tech companies with different risk profiles and growth potentials could mitigate some of these risks. Incorporating a mix of growth, value, and defensive stocks across different industries could balance the portfolio better and reduce volatility.\n\n### MARKET RISKS:\n\nKey market-wide risks include:\n- **Regulatory Risks**: Increased scrutiny and potential regulatory actions could impact the operational and financial performance of major tech companies.\n- **Global Economic Downturns**: Affecting consumer spending and investment in technology upgrades or expansions.\n- **Market Corrections**: High valuation metrics make the market vulnerable to corrections, particularly in the tech sector.\n- **Supply Chain Disruptions**: Operational risks that can affect product availability and costs.\n\n### INVESTMENT STRATEGY:\n\nGiven the current market sentiment and risks, a cautious investment strategy is recommended. Investors should:\n- **Maintain Current Positions** in high-valuation tech stocks but be ready to adjust based on market developments.\n- **Seek Diversification**: Look for opportunities outside the tech sector or within tech but in companies with lower valuations or different growth drivers.\n- **Liquidity Management**: Keep a portion of the portfolio in liquid assets to take advantage of buying opportunities on dips.\n- **Risk Management**: Use stop-loss orders or options for downside protection on high-valuation positions.\n\n### MARKET OUTLOOK:\n\n- **Short-term (1-3 months)**: The market may continue to exhibit volatility, with tech stocks particularly sensitive to news on regulatory actions, earnings reports, and global economic indicators. Caution is advised, with a focus on capital preservation.\n- **Medium-term (6-12 months)**: Depending on the resolution of key risks (regulatory challenges, economic conditions), there could be clearer signals for growth opportunities. If tech companies demonstrate adaptability and continued profitability despite these challenges, there could be potential for selective buying opportunities in the sector.\n\nIn summary, the current market environment calls for a balanced approach, combining cautious optimism with strategic diversification and vigilant risk management.",
+    "stocks_analyzed": 3,
+    "tokens_used": 1068
+  },
+  "raw_stock_data": [
+    {
+      "ticker": "AAPL",
+      "company_name": "Apple Inc.",
+      "sector": "Unknown",
+      "industry": "Unknown",
+      "market_cap": 3002095632384,
+      "current_price": 201.0,
+      "previous_close": 0,
+      "news": [
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:25:05.694929",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:25:05.694944",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:25:05.694946",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:25:05.694948",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:25:05.694950",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:25:05.694952",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:25:05.694954",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:25:05.694956",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:25:05.694958",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:25:05.694960",
+          "publisher": "",
+          "uuid": ""
+        }
+      ],
+      "price_history": [
+        {
+          "Open": 211.2829271905112,
+          "High": 218.5533916912833,
+          "Low": 211.0032951126973,
+          "Close": 217.98414611816406,
+          "Volume": 94127800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 220.71056863168138,
+          "High": 221.1899357355996,
+          "Low": 218.29373979930335,
+          "Close": 220.44091796875,
+          "Volume": 44299500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 220.48087718007702,
+          "High": 223.80651793975238,
+          "Low": 219.79177838679217,
+          "Close": 223.45697021484375,
+          "Volume": 34493600,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 223.21727075576553,
+          "High": 224.7253029108424,
+          "Low": 220.18125884970436,
+          "Close": 221.2398681640625,
+          "Volume": 34466100,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 221.1000540446544,
+          "High": 224.69534536875565,
+          "Low": 220.271139232742,
+          "Close": 223.5568389892578,
+          "Volume": 37094800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 221.3796909591809,
+          "High": 223.51688772665744,
+          "Low": 217.39491092445158,
+          "Close": 217.6146240234375,
+          "Volume": 39818600,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 216.72579102857173,
+          "High": 225.32451569687797,
+          "Low": 215.9468137615173,
+          "Close": 221.83909606933594,
+          "Volume": 65299300,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 219.5221267668628,
+          "High": 223.3870536043053,
+          "Low": 218.61331487709137,
+          "Close": 222.897705078125,
+          "Volume": 36412700,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 221.03016017035932,
+          "High": 224.89508702876748,
+          "Low": 220.73055001137135,
+          "Close": 223.59678649902344,
+          "Volume": 35905900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 205.27081771109022,
+          "High": 207.2182761783418,
+          "Low": 200.9864426085102,
+          "Close": 202.9239044189453,
+          "Volume": 103419000,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 193.6360793511012,
+          "High": 199.61824028069563,
+          "Low": 187.09465424061224,
+          "Close": 188.13330078125,
+          "Volume": 125910900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 176.967935484531,
+          "High": 193.89573468350994,
+          "Low": 174.39131242893686,
+          "Close": 181.2223663330078,
+          "Volume": 160466300,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 186.4554964395268,
+          "High": 190.09072892121037,
+          "Low": 168.9884109270566,
+          "Close": 172.19419860839844,
+          "Volume": 120859500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 171.72480450043201,
+          "High": 200.3472738997123,
+          "Low": 171.6648855169899,
+          "Close": 198.58958435058594,
+          "Volume": 184395900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 188.82240088513313,
+          "High": 194.52491452460524,
+          "Low": 182.76034285398336,
+          "Close": 190.17062377929688,
+          "Volume": 121880000,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 185.856281088865,
+          "High": 199.27866665425725,
+          "Low": 185.81632494094944,
+          "Close": 197.89048767089844,
+          "Volume": 87435900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 211.1630921847052,
+          "High": 212.6611277249045,
+          "Low": 200.8965565016436,
+          "Close": 202.25477600097656,
+          "Volume": 101352900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 201.59564256833872,
+          "High": 203.24347561495443,
+          "Low": 199.53834280484799,
+          "Close": 201.87527465820312,
+          "Volume": 51343900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 198.10021911176236,
+          "High": 200.4371508814261,
+          "Low": 192.11805840887246,
+          "Close": 194.0155792236328,
+          "Volume": 59732400,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 196.94174374665747,
+          "High": 198.56961397436802,
+          "Low": 194.16538565496842,
+          "Close": 196.72203063964844,
+          "Volume": 51334300,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 193.01688474432112,
+          "High": 193.54618940120912,
+          "Low": 189.56140949031536,
+          "Close": 192.9070281982422,
+          "Volume": 46742500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 195.8631544964882,
+          "High": 201.32599215129426,
+          "Low": 195.71335703344474,
+          "Close": 199.47842407226562,
+          "Volume": 52976400,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 205.7302222309065,
+          "High": 207.7276030292648,
+          "Low": 202.5344160012944,
+          "Close": 204.33206176757812,
+          "Volume": 52929200,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 204.62166872266098,
+          "High": 208.5565112075726,
+          "Low": 202.67422555441442,
+          "Close": 208.09710693359375,
+          "Volume": 47311000,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 206.0997277622984,
+          "High": 209.47530610539675,
+          "Low": 205.92995222724628,
+          "Close": 209.00592041015625,
+          "Volume": 38222300,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 209.72497582911666,
+          "High": 211.2230113707532,
+          "Low": 207.1883090170199,
+          "Close": 209.8647918701172,
+          "Volume": 38743100,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 208.41669143858087,
+          "High": 211.96204522644123,
+          "Low": 208.09710321217068,
+          "Close": 210.9333953857422,
+          "Volume": 36827600,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 209.02590396975114,
+          "High": 213.30029766677714,
+          "Low": 206.399343338795,
+          "Close": 212.22171020507812,
+          "Volume": 52286500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 208.80618155790114,
+          "High": 214.2790004444518,
+          "Low": 208.62640936955898,
+          "Close": 213.04063415527344,
+          "Volume": 57365700,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 205.82009105417706,
+          "High": 206.71892151455646,
+          "Low": 201.89524528415058,
+          "Close": 205.08106994628906,
+          "Volume": 101010600,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 202.83402512431957,
+          "High": 203.83271551835597,
+          "Low": 197.9504297070337,
+          "Close": 198.62953186035156,
+          "Volume": 69018500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 197.9504203457911,
+          "High": 200.38721199140494,
+          "Low": 196.7619763948813,
+          "Close": 198.25001525878906,
+          "Volume": 51216500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 198.90915494694545,
+          "High": 199.1788056079939,
+          "Low": 192.99690991055434,
+          "Close": 195.99298095703125,
+          "Volume": 68536700,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 197.46106353953903,
+          "High": 199.78801395815432,
+          "Low": 194.42503624466005,
+          "Close": 197.2313690185547,
+          "Volume": 50478900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 198.739389980464,
+          "High": 200.2773664943336,
+          "Low": 197.28129528859796,
+          "Close": 198.27000427246094,
+          "Volume": 36453900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 210.97000122070312,
+          "High": 211.27000427246094,
+          "Low": 206.75,
+          "Close": 210.7899932861328,
+          "Volume": 63775800,
+          "Dividends": 0.26,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 210.42999267578125,
+          "High": 213.39999389648438,
+          "Low": 209.0,
+          "Close": 212.92999267578125,
+          "Volume": 51909300,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 212.42999267578125,
+          "High": 213.94000244140625,
+          "Low": 210.5800018310547,
+          "Close": 212.3300018310547,
+          "Volume": 49325800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 210.9499969482422,
+          "High": 212.9600067138672,
+          "Low": 209.5399932861328,
+          "Close": 211.4499969482422,
+          "Volume": 45029500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 212.36000061035156,
+          "High": 212.57000732421875,
+          "Low": 209.77000427246094,
+          "Close": 211.25999450683594,
+          "Volume": 54737900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 207.91000366210938,
+          "High": 209.47999572753906,
+          "Low": 204.25999450683594,
+          "Close": 208.77999877929688,
+          "Volume": 46140500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 207.6699981689453,
+          "High": 208.47000122070312,
+          "Low": 205.02999877929688,
+          "Close": 206.86000061035156,
+          "Volume": 42496600,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 205.1699981689453,
+          "High": 207.0399932861328,
+          "Low": 200.7100067138672,
+          "Close": 202.08999633789062,
+          "Volume": 59211800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 200.7100067138672,
+          "High": 202.75,
+          "Low": 199.6999969482422,
+          "Close": 201.36000061035156,
+          "Volume": 46742400,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 193.6699981689453,
+          "High": 197.6999969482422,
+          "Low": 193.4600067138672,
+          "Close": 195.27000427246094,
+          "Volume": 78432900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 198.3000030517578,
+          "High": 200.74000549316406,
+          "Low": 197.42999267578125,
+          "Close": 200.2100067138672,
+          "Volume": 56288500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 200.58999633789062,
+          "High": 202.72999572753906,
+          "Low": 199.89999389648438,
+          "Close": 200.4199981689453,
+          "Volume": 45339700,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 203.5800018310547,
+          "High": 203.80999755859375,
+          "Low": 198.50999450683594,
+          "Close": 199.9499969482422,
+          "Volume": 51396800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 199.3699951171875,
+          "High": 201.9600067138672,
+          "Low": 196.77999877929688,
+          "Close": 200.85000610351562,
+          "Volume": 70819900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 200.27999877929688,
+          "High": 202.1300048828125,
+          "Low": 200.1199951171875,
+          "Close": 201.6999969482422,
+          "Volume": 35423300,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 201.35000610351562,
+          "High": 203.77000427246094,
+          "Low": 200.9600067138672,
+          "Close": 203.27000427246094,
+          "Volume": 46381600,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 202.91000366210938,
+          "High": 206.24000549316406,
+          "Low": 202.10000610351562,
+          "Close": 202.82000732421875,
+          "Volume": 43604000,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 203.5,
+          "High": 204.75,
+          "Low": 200.14999389648438,
+          "Close": 200.6300048828125,
+          "Volume": 55126100,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 203.0,
+          "High": 205.6999969482422,
+          "Low": 202.0500030517578,
+          "Close": 203.9199981689453,
+          "Volume": 46607700,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 204.38999938964844,
+          "High": 206.0,
+          "Low": 200.02000427246094,
+          "Close": 201.4499969482422,
+          "Volume": 72862600,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 200.60000610351562,
+          "High": 204.35000610351562,
+          "Low": 200.57000732421875,
+          "Close": 202.6699981689453,
+          "Volume": 54672600,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 203.5,
+          "High": 204.5,
+          "Low": 198.41000366210938,
+          "Close": 198.77999877929688,
+          "Volume": 60989900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 199.0800018310547,
+          "High": 199.67999267578125,
+          "Low": 197.36000061035156,
+          "Close": 199.1999969482422,
+          "Volume": 43904600,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 199.72999572753906,
+          "High": 200.3699951171875,
+          "Low": 195.6999969482422,
+          "Close": 196.4499969482422,
+          "Volume": 51447300,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 197.3000030517578,
+          "High": 198.69000244140625,
+          "Low": 196.55999755859375,
+          "Close": 198.4199981689453,
+          "Volume": 43020700,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 197.1999969482422,
+          "High": 198.38999938964844,
+          "Low": 195.2100067138672,
+          "Close": 195.63999938964844,
+          "Volume": 38856200,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 195.94000244140625,
+          "High": 197.57000732421875,
+          "Low": 195.07000732421875,
+          "Close": 196.5800018310547,
+          "Volume": 45394700,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 198.24000549316406,
+          "High": 201.6999969482422,
+          "Low": 196.86000061035156,
+          "Close": 201.0,
+          "Volume": 95914700,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        }
+      ],
+      "technical_indicators": {
+        "current_price": 201.0,
+        "sma_20": 200.02950057983398,
+        "sma_50": 202.23868774414063,
+        "sma_200": null,
+        "rsi": 50.256751010548996,
+        "macd": -1.4840346893689116,
+        "macd_signal": -1.2863080809756688,
+        "bb_upper": 205.0685883769377,
+        "bb_lower": 194.99041278273026,
+        "bb_position": 0.5962971334537799,
+        "price_vs_sma20": 0.48517814490002403,
+        "price_vs_sma50": -0.6124880248964739,
+        "volume_avg": 54161310.0,
+        "volume_current": 95914700.0,
+        "volatility": 21.95780478441408
+      },
+      "company_info": {
+        "pe_ratio": 31.357256,
+        "forward_pe": 24.187725,
+        "price_to_book": 44.956383,
+        "debt_to_equity": null,
+        "roe": null,
+        "profit_margin": null,
+        "revenue_growth": null,
+        "earnings_growth": null
+      },
+      "collected_at": "2025-06-21T23:25:06.263045",
+      "chart_path": "charts/AAPL_technical_analysis_20250621_232506.png"
+    },
+    {
+      "ticker": "GOOGL",
+      "company_name": "Alphabet Inc.",
+      "sector": "Unknown",
+      "industry": "Unknown",
+      "market_cap": 2028092129280,
+      "current_price": 166.63999938964844,
+      "previous_close": 0,
+      "news": [
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:25:31.782217",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:25:31.782232",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:25:31.782234",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:25:31.782237",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:25:31.782239",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:25:31.782241",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:25:31.782243",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:25:31.782245",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:25:31.782247",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:25:31.782249",
+          "publisher": "",
+          "uuid": ""
+        }
+      ],
+      "price_history": [
+        {
+          "Open": 161.01508017617863,
+          "High": 164.04141524263727,
+          "Low": 160.69545978774022,
+          "Close": 163.79171752929688,
+          "Volume": 36625800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 166.86800133324036,
+          "High": 168.11648994593173,
+          "Low": 164.94032699026835,
+          "Close": 167.4772491455078,
+          "Volume": 30879100,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 168.775668441695,
+          "High": 170.42368243836484,
+          "Low": 168.1164780833655,
+          "Close": 170.353759765625,
+          "Volume": 24174400,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 168.79565092149923,
+          "High": 169.40491393976436,
+          "Low": 164.64067739498105,
+          "Close": 164.86041259765625,
+          "Volume": 28901600,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 164.43094810403895,
+          "High": 165.21998619662182,
+          "Low": 161.8041232023028,
+          "Close": 162.04383850097656,
+          "Volume": 24508300,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 160.29595772818402,
+          "High": 161.62435145983125,
+          "Low": 153.44425151462127,
+          "Close": 154.14340209960938,
+          "Volume": 48669300,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 152.9248693898488,
+          "High": 155.3519238675497,
+          "Low": 150.47783482762614,
+          "Close": 154.45301818847656,
+          "Volume": 54603500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 153.43424066067087,
+          "High": 157.9088345005831,
+          "Low": 153.43424066067087,
+          "Close": 156.8800811767578,
+          "Volume": 30672900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 154.9623987635517,
+          "High": 158.21846678254826,
+          "Low": 154.51294591611935,
+          "Close": 156.85011291503906,
+          "Volume": 25041700,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 150.92729334389097,
+          "High": 152.59527231622977,
+          "Low": 150.20816267744866,
+          "Close": 150.5377655029297,
+          "Volume": 46883400,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 147.83102450056057,
+          "High": 150.8873372265073,
+          "Low": 145.20421499461688,
+          "Close": 145.4239501953125,
+          "Volume": 62259500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 141.37884623013926,
+          "High": 152.66518575265,
+          "Low": 140.3600753076292,
+          "Close": 146.5725555419922,
+          "Volume": 76794100,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 151.0371605852081,
+          "High": 152.05593156691467,
+          "Low": 142.85706070456766,
+          "Close": 144.52503967285156,
+          "Volume": 52200200,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 144.24536764564118,
+          "High": 159.3570775505851,
+          "Low": 143.73598981661124,
+          "Close": 158.51809692382812,
+          "Volume": 70406200,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 156.35071129003578,
+          "High": 157.5292924054746,
+          "Low": 149.74870323215254,
+          "Close": 152.63522338867188,
+          "Volume": 48022000,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 152.71511816628092,
+          "High": 157.47935489094493,
+          "Low": 152.63522830805417,
+          "Close": 156.9499969482422,
+          "Volume": 33636200,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 159.80653847762434,
+          "High": 161.52445998548595,
+          "Low": 157.3694863273863,
+          "Close": 158.87767028808594,
+          "Volume": 30333000,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 158.93759983361085,
+          "High": 159.4569601254283,
+          "Low": 155.02234135810752,
+          "Close": 156.12100219726562,
+          "Volume": 27551500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 152.91488990871326,
+          "High": 155.70150975970526,
+          "Low": 151.326800825977,
+          "Close": 153.1446075439453,
+          "Volume": 28187400,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 154.10343899442373,
+          "High": 154.49296683009544,
+          "Low": 148.32044647401452,
+          "Close": 150.97723388671875,
+          "Volume": 32938500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 148.69998342759925,
+          "High": 148.76989086061988,
+          "Low": 145.9233461435289,
+          "Close": 147.49143981933594,
+          "Volume": 26049100,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 148.70996777577147,
+          "High": 152.0059806006662,
+          "Low": 148.360384885124,
+          "Close": 151.28684997558594,
+          "Volume": 26971800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 155.42185055428513,
+          "High": 157.3395272287139,
+          "Low": 153.62402390940207,
+          "Close": 155.16217041015625,
+          "Volume": 31128800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 155.96118216578617,
+          "High": 159.39702506290834,
+          "Low": 155.60161685700967,
+          "Close": 159.08740234375,
+          "Volume": 45894000,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 164.8704156189098,
+          "High": 165.89916899199292,
+          "Low": 160.84527440652565,
+          "Close": 161.76417541503906,
+          "Volume": 56034000,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 162.2335934576757,
+          "High": 162.9527241022343,
+          "Low": 158.40823784275827,
+          "Close": 160.41580200195312,
+          "Volume": 29745800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 160.12616457196697,
+          "High": 160.54565492156792,
+          "Low": 157.32954700095436,
+          "Close": 159.9663543701172,
+          "Volume": 26809000,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 157.78897065630795,
+          "High": 159.07741935833297,
+          "Low": 155.2120884925965,
+          "Close": 158.6079864501953,
+          "Volume": 34981100,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 160.255986901565,
+          "High": 161.7541731584952,
+          "Low": 158.7178557168657,
+          "Close": 161.10496520996094,
+          "Volume": 30203200,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 163.21241957712974,
+          "High": 164.77053089446972,
+          "Low": 161.6742731041275,
+          "Close": 163.8316650390625,
+          "Volume": 25715000,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 162.80291566353057,
+          "High": 165.19002528971967,
+          "Low": 162.52325543253818,
+          "Close": 164.01145935058594,
+          "Volume": 21341800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 161.97390744721895,
+          "High": 164.60073221310822,
+          "Low": 160.99509669884785,
+          "Close": 163.03262329101562,
+          "Volume": 21277200,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 163.88160091924024,
+          "High": 164.8004866523399,
+          "Low": 147.6612323828153,
+          "Close": 151.19696044921875,
+          "Volume": 127490100,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 154.81259075606965,
+          "High": 155.74145898524296,
+          "Low": 152.715123752916,
+          "Close": 154.0934600830078,
+          "Volume": 57498700,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 153.98358884442797,
+          "High": 154.86252969975314,
+          "Low": 152.01596958260927,
+          "Close": 152.5653076171875,
+          "Volume": 32435300,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 157.2995737723926,
+          "High": 158.90762762310243,
+          "Low": 156.06106765297667,
+          "Close": 158.26840209960938,
+          "Volume": 44138800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 158.59798647987657,
+          "High": 160.37584814800852,
+          "Low": 155.97117700529293,
+          "Close": 159.33709716796875,
+          "Volume": 42382100,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 159.7665968345665,
+          "High": 166.7980779664445,
+          "Low": 159.4170139283214,
+          "Close": 165.1700439453125,
+          "Volume": 48755900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 165.63946564247587,
+          "High": 166.00902860866202,
+          "Low": 162.1736602838883,
+          "Close": 163.76174926757812,
+          "Volume": 33146700,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 167.52719070383273,
+          "High": 169.14524229932235,
+          "Low": 165.4197413290067,
+          "Close": 165.9890594482422,
+          "Volume": 42846900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 164.311078821177,
+          "High": 166.43850822896752,
+          "Low": 164.02143617765117,
+          "Close": 166.338623046875,
+          "Volume": 30426100,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 166.22875761227516,
+          "High": 168.2962620339302,
+          "Low": 162.7030270512069,
+          "Close": 163.78172302246094,
+          "Volume": 46607700,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 163.49207927319333,
+          "High": 172.93064990762463,
+          "Low": 163.36223158372133,
+          "Close": 168.35618591308594,
+          "Volume": 73416000,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 171.6422171391164,
+          "High": 176.55626639163424,
+          "Low": 170.50359615670786,
+          "Close": 170.66339111328125,
+          "Volume": 74864400,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 168.85557933287677,
+          "High": 169.7545002456487,
+          "Low": 167.68699586257836,
+          "Close": 168.26629638671875,
+          "Volume": 35211400,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 169.9542560308247,
+          "High": 172.9606110264557,
+          "Low": 169.79444583588602,
+          "Close": 172.69093322753906,
+          "Volume": 37995700,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 172.95063181853965,
+          "High": 175.0580811773991,
+          "Low": 171.70214322301487,
+          "Close": 172.15159606933594,
+          "Volume": 34784000,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 173.78960291012612,
+          "High": 174.20909322624098,
+          "Low": 170.42368271917738,
+          "Close": 171.65219116210938,
+          "Volume": 29373800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 171.14282080509608,
+          "High": 172.0017815585655,
+          "Low": 167.23754486546525,
+          "Close": 171.5323486328125,
+          "Volume": 52639900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 167.637058963566,
+          "High": 169.66460324672883,
+          "Low": 167.18760611208933,
+          "Close": 168.82562255859375,
+          "Volume": 38612300,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 167.28749382619188,
+          "High": 168.276287066322,
+          "Low": 165.08015922486254,
+          "Close": 165.97906494140625,
+          "Volume": 45084900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 166.53838821108508,
+          "High": 168.01659436979696,
+          "Low": 166.15884281939123,
+          "Close": 167.8468017578125,
+          "Volume": 26900800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 170.1340365467451,
+          "High": 170.72331951416996,
+          "Low": 167.3873615992156,
+          "Close": 168.00662231445312,
+          "Volume": 36379100,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 170.6234412090639,
+          "High": 174.2890017669552,
+          "Low": 170.6234412090639,
+          "Close": 173.46998596191406,
+          "Volume": 35731800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 174.5399932861328,
+          "High": 176.47000122070312,
+          "Low": 174.3699951171875,
+          "Close": 176.08999633789062,
+          "Volume": 28935900,
+          "Dividends": 0.21,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 176.1999969482422,
+          "High": 181.11000061035156,
+          "Low": 174.91000366210938,
+          "Close": 178.60000610351562,
+          "Volume": 61766100,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 179.77000427246094,
+          "High": 180.3699951171875,
+          "Low": 176.75,
+          "Close": 177.35000610351562,
+          "Volume": 31646800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 176.17999267578125,
+          "High": 176.72000122070312,
+          "Low": 174.75,
+          "Close": 175.6999969482422,
+          "Volume": 20941900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 172.44000244140625,
+          "High": 177.1300048828125,
+          "Low": 172.38999938964844,
+          "Close": 174.6699981689453,
+          "Volume": 27663100,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 174.72999572753906,
+          "High": 176.94000244140625,
+          "Low": 174.64999389648438,
+          "Close": 176.77000427246094,
+          "Volume": 27389200,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 175.6999969482422,
+          "High": 177.36000061035156,
+          "Low": 174.5800018310547,
+          "Close": 175.9499969482422,
+          "Volume": 24973000,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 176.00999450683594,
+          "High": 176.55999755859375,
+          "Low": 173.1999969482422,
+          "Close": 173.32000732421875,
+          "Volume": 28707500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 173.9499969482422,
+          "High": 174.33999633789062,
+          "Low": 165.4600067138672,
+          "Close": 166.63999938964844,
+          "Volume": 75247800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        }
+      ],
+      "technical_indicators": {
+        "current_price": 166.63999938964844,
+        "sma_20": 172.30874328613282,
+        "sma_50": 164.16040405273438,
+        "sma_200": null,
+        "rsi": 42.875408476580674,
+        "macd": 2.4693518133877603,
+        "macd_signal": 3.2529795969194524,
+        "bb_upper": 179.91626025359813,
+        "bb_lower": 164.70122631866752,
+        "bb_position": 0.1274248272644262,
+        "price_vs_sma20": -3.289875944989612,
+        "price_vs_sma50": 1.5104710244971873,
+        "volume_avg": 38742470.0,
+        "volume_current": 75247800.0,
+        "volatility": 26.479974309146375
+      },
+      "company_info": {
+        "pe_ratio": 18.57748,
+        "forward_pe": 18.598213,
+        "price_to_book": 5.866573,
+        "debt_to_equity": null,
+        "roe": null,
+        "profit_margin": null,
+        "revenue_growth": null,
+        "earnings_growth": null
+      },
+      "collected_at": "2025-06-21T23:25:32.125138",
+      "chart_path": "charts/GOOGL_technical_analysis_20250621_232532.png"
+    },
+    {
+      "ticker": "MSFT",
+      "company_name": "Microsoft Corporation",
+      "sector": "Technology",
+      "industry": "Software - Infrastructure",
+      "market_cap": 3548294676480,
+      "current_price": 477.3999938964844,
+      "previous_close": 480.24,
+      "news": [
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:26:16.827049",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:26:16.827060",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:26:16.827062",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:26:16.827064",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:26:16.827066",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:26:16.827068",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:26:16.827070",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:26:16.827073",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:26:16.827075",
+          "publisher": "",
+          "uuid": ""
+        },
+        {
+          "title": "",
+          "summary": "",
+          "link": "",
+          "published_date": "2025-06-21T23:26:16.827077",
+          "publisher": "",
+          "uuid": ""
+        }
+      ],
+      "price_history": [
+        {
+          "Open": 382.5177544739553,
+          "High": 391.0221306945889,
+          "Low": 382.09851071654674,
+          "Close": 390.54302978515625,
+          "Volume": 39675900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 394.67543616141086,
+          "High": 394.67543616141086,
+          "Low": 389.09568331150246,
+          "Close": 392.35968017578125,
+          "Volume": 21004500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 393.19816458592396,
+          "High": 395.63366532055824,
+          "Low": 391.9205113732519,
+          "Close": 394.4358825683594,
+          "Volume": 15775000,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 394.27618318122023,
+          "High": 394.5856126855185,
+          "Low": 387.85797313035886,
+          "Close": 389.2554016113281,
+          "Volume": 16108400,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 389.4151007040484,
+          "High": 391.5212195564284,
+          "Low": 386.6900923994873,
+          "Close": 389.8642578125,
+          "Volume": 13766800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 387.36882809704144,
+          "High": 388.4169222438939,
+          "Low": 376.2392666189567,
+          "Close": 378.1058349609375,
+          "Volume": 21632000,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 371.8573344110368,
+          "High": 376.3790320336197,
+          "Low": 366.5670283067677,
+          "Close": 374.7021179199219,
+          "Volume": 35184700,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 373.96346276032,
+          "High": 382.1484487727996,
+          "Low": 372.54608191207893,
+          "Close": 381.4896545410156,
+          "Volume": 19689500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 377.2773862564683,
+          "High": 384.3743428432238,
+          "Low": 375.92985398533636,
+          "Close": 381.43975830078125,
+          "Volume": 16092600,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 374.10321411915555,
+          "High": 376.788287190408,
+          "Low": 368.67318036225987,
+          "Close": 372.42626953125,
+          "Volume": 30198000,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 363.4627502923482,
+          "High": 373.9035742050073,
+          "Low": 358.8212773354498,
+          "Close": 359.18060302734375,
+          "Volume": 49209900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 350.2370336524557,
+          "High": 370.32015981776436,
+          "Low": 344.1581969485817,
+          "Close": 357.2042236328125,
+          "Volume": 50425000,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 367.585185716996,
+          "High": 372.9652928837084,
+          "Low": 349.6081786868937,
+          "Close": 353.9102783203125,
+          "Volume": 35868900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 352.8921435234206,
+          "High": 392.50941370351666,
+          "Low": 352.45294739016697,
+          "Close": 389.7744140625,
+          "Volume": 50199700,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 381.3598744812396,
+          "High": 383.19649903483815,
+          "Low": 367.12599611378243,
+          "Close": 380.65118408203125,
+          "Volume": 38024400,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 379.9425037151649,
+          "High": 389.3352333779351,
+          "Low": 378.19571053548395,
+          "Close": 387.7381896972656,
+          "Volume": 23839200,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 392.4994245329486,
+          "High": 393.92679674338564,
+          "Low": 383.5059256339463,
+          "Close": 387.0993347167969,
+          "Volume": 19251200,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 387.79806728846995,
+          "High": 391.17187833074144,
+          "Low": 383.4560325474498,
+          "Close": 385.0231628417969,
+          "Volume": 17199900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 379.97244183574617,
+          "High": 380.9106912763521,
+          "Low": 367.32564600100716,
+          "Close": 370.92901611328125,
+          "Volume": 21967800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 373.0651098854367,
+          "High": 373.6340726815441,
+          "Low": 366.2176953329466,
+          "Close": 367.1060485839844,
+          "Volume": 20943700,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 362.1551460624454,
+          "High": 363.8121077971333,
+          "Low": 355.01825440362086,
+          "Close": 358.4619140625,
+          "Volume": 20807300,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 362.7141283475077,
+          "High": 367.09606804173376,
+          "Low": 359.20055908423666,
+          "Close": 366.1478271484375,
+          "Volume": 19485000,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 375.3708716590499,
+          "High": 379.6929540391626,
+          "Low": 372.33643389707953,
+          "Close": 373.7039489746094,
+          "Volume": 20545500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 375.01155205300716,
+          "High": 387.7381880213899,
+          "Low": 374.5024768665421,
+          "Close": 386.59027099609375,
+          "Volume": 22232300,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 386.29083932956814,
+          "High": 391.44138750936105,
+          "Low": 383.8952433175299,
+          "Close": 391.1319580078125,
+          "Volume": 18973200,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 391.241728610284,
+          "High": 392.0202980494585,
+          "Low": 385.9315006090283,
+          "Close": 390.4432067871094,
+          "Volume": 16579400,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 390.5829324517716,
+          "High": 394.3759872470841,
+          "Low": 389.66463540586307,
+          "Close": 393.31793212890625,
+          "Volume": 14974000,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 389.58477271143016,
+          "High": 395.93313400867555,
+          "Low": 383.73552563819743,
+          "Close": 394.53570556640625,
+          "Volume": 36461100,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 430.3199808366381,
+          "High": 436.1892106723326,
+          "Low": 424.12136912560175,
+          "Close": 424.6204528808594,
+          "Volume": 58938100,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 430.948839257634,
+          "High": 438.63474141621873,
+          "Low": 429.20204608174254,
+          "Close": 434.48236083984375,
+          "Volume": 30757400,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 432.07675654489867,
+          "High": 438.6946118778074,
+          "Low": 431.3181395047298,
+          "Close": 435.3707275390625,
+          "Volume": 20136100,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 431.408009380462,
+          "High": 436.92787448428356,
+          "Low": 430.3798980651205,
+          "Close": 432.5159606933594,
+          "Volume": 15104200,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 433.04500054847074,
+          "High": 437.3171563878889,
+          "Low": 430.319992206568,
+          "Close": 432.555908203125,
+          "Volume": 23295300,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 437.12748451655574,
+          "High": 442.85698666150637,
+          "Low": 434.86165526525525,
+          "Close": 437.3670654296875,
+          "Volume": 23491300,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 439.19371771814804,
+          "High": 439.93235195021686,
+          "Low": 435.08127232610667,
+          "Close": 437.9260559082031,
+          "Volume": 15324200,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 445.12281367736733,
+          "High": 448.5465208630377,
+          "Low": 438.9740982732109,
+          "Close": 448.4367370605469,
+          "Volume": 22821900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 446.9594623818115,
+          "High": 449.8441812103938,
+          "Low": 444.54388351816056,
+          "Close": 448.3169860839844,
+          "Volume": 23618800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 447.3187935842875,
+          "High": 453.0682176126866,
+          "Low": 447.3187935842875,
+          "Close": 452.1099853515625,
+          "Volume": 19902800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 450.7699890136719,
+          "High": 456.19000244140625,
+          "Low": 450.42999267578125,
+          "Close": 453.1300048828125,
+          "Volume": 21992300,
+          "Dividends": 0.83,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 452.04998779296875,
+          "High": 454.3599853515625,
+          "Low": 448.7300109863281,
+          "Close": 454.2699890136719,
+          "Volume": 23849800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 450.8800048828125,
+          "High": 459.5899963378906,
+          "Low": 450.79998779296875,
+          "Close": 458.8699951171875,
+          "Volume": 21336500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 455.5899963378906,
+          "High": 458.3399963378906,
+          "Low": 454.32000732421875,
+          "Close": 458.1700134277344,
+          "Volume": 15441800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 454.57000732421875,
+          "High": 457.7799987792969,
+          "Low": 451.80999755859375,
+          "Close": 452.57000732421875,
+          "Volume": 19216900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 454.95001220703125,
+          "High": 460.25,
+          "Low": 453.8999938964844,
+          "Close": 454.8599853515625,
+          "Volume": 18025600,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 449.9800109863281,
+          "High": 453.69000244140625,
+          "Low": 448.9100036621094,
+          "Close": 450.17999267578125,
+          "Volume": 16883500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 456.4800109863281,
+          "High": 460.95001220703125,
+          "Low": 456.1199951171875,
+          "Close": 460.69000244140625,
+          "Volume": 20974300,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 461.2200012207031,
+          "High": 462.5199890136719,
+          "Low": 456.92999267578125,
+          "Close": 457.3599853515625,
+          "Volume": 17086300,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 461.54998779296875,
+          "High": 461.7200012207031,
+          "Low": 455.30999755859375,
+          "Close": 458.67999267578125,
+          "Volume": 13974800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 459.7200012207031,
+          "High": 461.67999267578125,
+          "Low": 455.5400085449219,
+          "Close": 460.3599853515625,
+          "Volume": 34770500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 457.1400146484375,
+          "High": 462.1099853515625,
+          "Low": 456.8900146484375,
+          "Close": 461.9700012207031,
+          "Volume": 16626500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 461.4700012207031,
+          "High": 464.1400146484375,
+          "Low": 460.8599853515625,
+          "Close": 462.9700012207031,
+          "Volume": 15743800,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 464.0,
+          "High": 465.69000244140625,
+          "Low": 463.0199890136719,
+          "Close": 463.8699951171875,
+          "Volume": 14162700,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 464.9599914550781,
+          "High": 469.6499938964844,
+          "Low": 464.0299987792969,
+          "Close": 467.67999267578125,
+          "Volume": 20131700,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 470.0899963378906,
+          "High": 473.3399963378906,
+          "Low": 468.7799987792969,
+          "Close": 470.3800048828125,
+          "Volume": 15285600,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 469.70001220703125,
+          "High": 473.42999267578125,
+          "Low": 468.6199951171875,
+          "Close": 472.75,
+          "Volume": 16469900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 471.19000244140625,
+          "High": 472.79998779296875,
+          "Low": 466.9599914550781,
+          "Close": 470.9200134277344,
+          "Volume": 15375900,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 470.0199890136719,
+          "High": 475.4700012207031,
+          "Low": 469.6600036621094,
+          "Close": 472.6199951171875,
+          "Volume": 16399200,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 475.0199890136719,
+          "High": 480.4200134277344,
+          "Low": 473.5199890136719,
+          "Close": 478.8699951171875,
+          "Volume": 18950600,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 476.4100036621094,
+          "High": 479.17999267578125,
+          "Low": 472.760009765625,
+          "Close": 474.9599914550781,
+          "Volume": 16814500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 475.2099914550781,
+          "High": 480.69000244140625,
+          "Low": 475.0,
+          "Close": 479.1400146484375,
+          "Volume": 15626100,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 475.3999938964844,
+          "High": 478.739990234375,
+          "Low": 474.0799865722656,
+          "Close": 478.0400085449219,
+          "Volume": 15414100,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 478.0,
+          "High": 481.0,
+          "Low": 474.4599914550781,
+          "Close": 480.239990234375,
+          "Volume": 17526500,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        },
+        {
+          "Open": 482.2300109863281,
+          "High": 483.4599914550781,
+          "Low": 476.8699951171875,
+          "Close": 477.3999938964844,
+          "Volume": 37468700,
+          "Dividends": 0.0,
+          "Stock Splits": 0.0
+        }
+      ],
+      "technical_indicators": {
+        "current_price": 477.3999938964844,
+        "sma_20": 467.6969970703125,
+        "sma_50": 434.7461260986328,
+        "sma_200": null,
+        "rsi": 73.40660906892028,
+        "macd": 11.097539748661688,
+        "macd_signal": 12.014888715523494,
+        "bb_upper": 485.8591373364364,
+        "bb_lower": 449.53485680418856,
+        "bb_position": 0.7671215144249811,
+        "price_vs_sma20": 2.0746331250686163,
+        "price_vs_sma50": 9.81121285211279,
+        "volume_avg": 18685540.0,
+        "volume_current": 37468700.0,
+        "volatility": 12.402074856828877
+      },
+      "company_info": {
+        "pe_ratio": 36.893356,
+        "forward_pe": 31.933111,
+        "price_to_book": 11.025404,
+        "debt_to_equity": 32.626,
+        "roe": 0.3361,
+        "profit_margin": 0.35789,
+        "revenue_growth": 0.133,
+        "earnings_growth": 0.177
+      },
+      "collected_at": "2025-06-21T23:26:17.109541",
+      "chart_path": "charts/MSFT_technical_analysis_20250621_232617.png"
+    }
+  ],
+  "cost_estimate": {
+    "total_tokens": 7000,
+    "estimated_cost": 0.112,
+    "cost_per_stock": 0.037333333333333336,
+    "input_tokens": 4900.0,
+    "output_tokens": 2100.0
+  },
+  "summary": {
+    "total_stocks": 3,
+    "successful_analyses": 3,
+    "failed_analyses": 0
+  }
+}
