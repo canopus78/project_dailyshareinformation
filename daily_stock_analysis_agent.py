@@ -1,3 +1,5 @@
+print("--- SCRIPT VERSION: JUNE-21-FINAL ---") # <--- 이 줄을 파일 맨 위에 추가하세요.
+
 import logging
 from pathlib import Path
 import json
