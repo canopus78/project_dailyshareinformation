@@ -1,0 +1,75 @@
+name: Stock Analysis Pipeline
+
+on:
+  schedule:
+    # Run every weekday at 9 AM and 3 PM EST
+    - cron: '0 14 * * 1-5'  # 9 AM EST (14:00 UTC)
+    - cron: '0 20 * * 1-5'  # 3 PM EST (20:00 UTC)
+  workflow_dispatch:  # Allow manual trigger
+    inputs:
+      tickers:
+        description: 'Comma-separated list of stock tickers (optional)'
+        required: false
+        default: ''
+
+jobs:
+  analyze-stocks:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Run stock analysis
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+        CUSTOM_TICKERS: ${{ github.event.inputs.tickers }}
+      run: |
+        # Use custom tickers if provided, otherwise use defaults
+        if [ -n "$CUSTOM_TICKERS" ]; then
+          echo "Using custom tickers: $CUSTOM_TICKERS"
+          python -c "
+import os
+import sys
+sys.path.append('src')
+from src.analyzer import YahooFinanceNewsAnalyzer
+from src.utils import setup_logging
+from config.settings import settings
+
+setup_logging()
+tickers = [t.strip().upper() for t in '$CUSTOM_TICKERS'.split(',') if t.strip()]
+analyzer = YahooFinanceNewsAnalyzer()
+results = analyzer.run_complete_analysis(tickers)
+print(f'Analysis completed for: {tickers}')
+"
+        else
+          python main.py
+        fi
+    
+    - name: Commit and push results
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add analysis/ charts/ data/ || true
+        git commit -m "📊 Update stock analysis $(date '+%Y-%m-%d %H:%M')" || exit 0
+        git push
+    
+    - name: Upload analysis artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: stock-analysis-results
+        path: |
+          analysis/
+          charts/
+        retention-days: 30
