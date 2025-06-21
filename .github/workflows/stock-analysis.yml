@@ -1,17 +1,16 @@
 name: Stock Analysis Pipeline
 
-# Manual trigger only - no scheduled runs
 on:
   workflow_dispatch:
     inputs:
       tickers:
-        description: '분석할 주식 티커 (쉼표로 구분, 예: AAPL,GOOGL,MSFT)'
+        description: 'Stock tickers to analyze (comma-separated, e.g., AAPL,GOOGL,MSFT)'
         required: true
         default: 'AAPL,GOOGL,MSFT,TSLA,NVDA'
         type: string
       
       max_stocks:
-        description: '최대 분석할 주식 수'
+        description: 'Maximum number of stocks to analyze'
         required: false
         default: '5'
         type: choice
@@ -22,7 +21,7 @@ on:
         - '10'
       
       analysis_depth:
-        description: '분석 깊이'
+        description: 'Analysis depth'
         required: false
         default: 'standard'
         type: choice
@@ -32,13 +31,13 @@ on:
         - 'detailed'
       
       send_notification:
-        description: '완료 후 웹훅 알림 전송'
+        description: 'Send webhook notification when complete'
         required: false
         default: true
         type: boolean
       
       create_charts:
-        description: '기술적 분석 차트 생성'
+        description: 'Generate technical analysis charts'
         required: false
         default: true
         type: boolean
@@ -49,63 +48,43 @@ jobs:
     timeout-minutes: 45
     
     steps:
-    - name: 📥 Checkout Code
+    - name: Checkout Code
       uses: actions/checkout@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
     
-    - name: 🐍 Setup Python
+    - name: Setup Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.9'
         cache: 'pip'
     
-    - name: 📦 Install Dependencies
+    - name: Install Dependencies
       run: |
-        echo "📦 Installing Python packages..."
+        echo "Installing Python packages..."
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        echo "✅ Dependencies installed successfully"
+        echo "Dependencies installed successfully"
     
-    - name: 🔍 Verify Setup
+    - name: Verify Setup
       run: |
-        echo "🔍 Verifying environment..."
+        echo "Verifying environment..."
         python --version
-        echo "📁 Current directory: $(pwd)"
-        echo "📂 Project structure:"
+        echo "Current directory: $(pwd)"
+        echo "Project structure:"
         find . -type f -name "*.py" | head -10
         
-        echo "🔑 Checking API key..."
+        echo "Checking API key..."
         if [ -z "${{ secrets.OPENAI_API_KEY }}" ]; then
-          echo "❌ OPENAI_API_KEY not found in secrets!"
+          echo "ERROR: OPENAI_API_KEY not found in secrets!"
           exit 1
         else
-          echo "✅ OPENAI_API_KEY found"
+          echo "OPENAI_API_KEY found"
         fi
     
-    - name: 📊 Run Manual Stock Analysis
-      env:
-        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-        # Manual run parameters
-        MANUAL_TICKERS: ${{ github.event.inputs.tickers }}
-        MAX_STOCKS: ${{ github.event.inputs.max_stocks }}
-        ANALYSIS_DEPTH: ${{ github.event.inputs.analysis_depth }}
-        CREATE_CHARTS: ${{ github.event.inputs.create_charts }}
-        SEND_NOTIFICATION: ${{ github.event.inputs.send_notification }}
+    - name: Create Manual Analysis Script
       run: |
-        echo "🚀 Starting Manual Stock Analysis..."
-        echo "=================================="
-        echo "📋 Input Parameters:"
-        echo "  - Tickers: $MANUAL_TICKERS"
-        echo "  - Max Stocks: $MAX_STOCKS"
-        echo "  - Analysis Depth: $ANALYSIS_DEPTH"
-        echo "  - Create Charts: $CREATE_CHARTS"
-        echo "  - Send Notification: $SEND_NOTIFICATION"
-        echo "=================================="
-        
-        # Create custom analysis script for manual run
-        cat > manual_analysis.py << 'EOF'
+        cat > manual_analysis.py << 'PYTHON_SCRIPT'
 import os
 import sys
 import time
@@ -114,15 +93,25 @@ from datetime import datetime
 # Add src to path
 sys.path.append('src')
 
-from src.analyzer import YahooFinanceNewsAnalyzer
-from src.utils import setup_logging, send_webhook_notification, estimate_api_cost
-from config.settings import settings
+try:
+    from src.analyzer import YahooFinanceNewsAnalyzer
+    from src.utils import setup_logging, send_webhook_notification, estimate_api_cost
+    from config.settings import settings
+except ImportError as e:
+    print(f"Import error: {e}")
+    print("Available files:")
+    import os
+    for root, dirs, files in os.walk('.'):
+        for file in files:
+            if file.endswith('.py'):
+                print(f"  {os.path.join(root, file)}")
+    sys.exit(1)
 
 def main():
     """Manual analysis with custom parameters"""
     setup_logging()
     
-    print("🎯 Manual Stock Analysis Started")
+    print("Manual Stock Analysis Started")
     print("=" * 50)
     
     # Parse input parameters
@@ -139,77 +128,71 @@ def main():
     else:
         tickers = settings.DEFAULT_TICKERS[:max_stocks]
     
-    print(f"📊 Tickers to analyze: {tickers}")
-    print(f"📈 Total stocks: {len(tickers)}")
-    print(f"🔍 Analysis depth: {analysis_depth}")
-    print(f"📊 Create charts: {create_charts}")
+    print(f"Tickers to analyze: {tickers}")
+    print(f"Total stocks: {len(tickers)}")
+    print(f"Analysis depth: {analysis_depth}")
+    print(f"Create charts: {create_charts}")
     
     # Cost estimation
     cost_estimate = estimate_api_cost(len(tickers))
-    print(f"💰 Estimated cost: ${cost_estimate['estimated_cost']:.2f}")
+    print(f"Estimated cost: ${cost_estimate['estimated_cost']:.2f}")
     
     # Adjust settings based on analysis depth
     if analysis_depth == 'quick':
-        # Quick analysis - less detailed prompts
         settings.MAX_TOKENS = 1500
         settings.TEMPERATURE = 0.5
-        print("⚡ Quick analysis mode - reduced detail")
+        print("Quick analysis mode - reduced detail")
     elif analysis_depth == 'detailed':
-        # Detailed analysis - more comprehensive
         settings.MAX_TOKENS = 3000
         settings.TEMPERATURE = 0.2
-        print("🔍 Detailed analysis mode - comprehensive analysis")
+        print("Detailed analysis mode - comprehensive analysis")
     
     # Initialize analyzer
     try:
         analyzer = YahooFinanceNewsAnalyzer()
-        print("✅ Analyzer initialized successfully")
+        print("Analyzer initialized successfully")
     except Exception as e:
-        print(f"❌ Failed to initialize analyzer: {str(e)}")
+        print(f"Failed to initialize analyzer: {str(e)}")
         return
     
     # Run analysis
     start_time = time.time()
-    print(f"🚀 Starting analysis at {datetime.now().strftime('%H:%M:%S')}")
+    print(f"Starting analysis at {datetime.now().strftime('%H:%M:%S')}")
     
     try:
         results = analyzer.run_complete_analysis(tickers)
         
-        # Override chart creation if disabled
-        if not create_charts:
-            print("📊 Chart creation disabled - skipping charts")
-        
         end_time = time.time()
         duration = end_time - start_time
         
-        print(f"✅ Analysis completed in {duration:.1f} seconds")
-        print(f"📊 Success rate: {results['summary']['successful_analyses']}/{results['summary']['total_stocks']}")
+        print(f"Analysis completed in {duration:.1f} seconds")
+        print(f"Success rate: {results['summary']['successful_analyses']}/{results['summary']['total_stocks']}")
         
         # Send notification
         if send_notification and settings.WEBHOOK_URL:
-            message = f"""🎯 **Manual Stock Analysis Complete!**
+            message = f"""Manual Stock Analysis Complete!
             
-**Tickers:** {', '.join(tickers)}
-**Success Rate:** {results['summary']['successful_analyses']}/{results['summary']['total_stocks']}
-**Duration:** {duration:.1f} seconds
-**Cost:** ~${cost_estimate['estimated_cost']:.2f}
-**Analysis Depth:** {analysis_depth}
+Tickers: {', '.join(tickers)}
+Success Rate: {results['summary']['successful_analyses']}/{results['summary']['total_stocks']}
+Duration: {duration:.1f} seconds
+Cost: ~${cost_estimate['estimated_cost']:.2f}
+Analysis Depth: {analysis_depth}
 
-**Top Recommendations:**"""
+Top Recommendations:"""
             
             # Add top 3 recommendations
             for analysis in results['individual_analyses'][:3]:
                 if 'error' not in analysis:
                     rec = analysis['structured_analysis'].get('investment_recommendation', 'N/A')
                     rec_summary = rec.split('.')[0] if '.' in rec else rec[:50]
-                    message += f"\n• **{analysis['ticker']}:** {rec_summary}"
+                    message += f"\n• {analysis['ticker']}: {rec_summary}"
             
             send_webhook_notification(settings.WEBHOOK_URL, message)
-            print("📢 Notification sent successfully")
+            print("Notification sent successfully")
         
         # Print summary
         print("\n" + "=" * 50)
-        print("📋 ANALYSIS SUMMARY")
+        print("ANALYSIS SUMMARY")
         print("=" * 50)
         
         for analysis in results['individual_analyses']:
@@ -217,124 +200,150 @@ def main():
                 ticker = analysis['ticker']
                 rec = analysis['structured_analysis'].get('investment_recommendation', 'N/A')
                 rec_short = rec.split('.')[0] if '.' in rec else rec[:80]
-                print(f"📊 {ticker}: {rec_short}...")
+                print(f"{ticker}: {rec_short}...")
         
-        print(f"\n💾 Files saved in:")
-        print(f"  📄 analysis/ - Analysis reports")
-        print(f"  📈 charts/ - Technical charts")
+        print(f"\nFiles saved in:")
+        print(f"  analysis/ - Analysis reports")
+        print(f"  charts/ - Technical charts")
         
     except Exception as e:
-        print(f"❌ Analysis failed: {str(e)}")
+        print(f"Analysis failed: {str(e)}")
+        import traceback
+        traceback.print_exc()
         
         # Send error notification
         if send_notification and settings.WEBHOOK_URL:
-            error_message = f"""❌ **Stock Analysis Failed**
+            error_message = f"""Stock Analysis Failed
             
-**Tickers:** {', '.join(tickers)}
-**Error:** {str(e)}
-**Time:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"""
+Tickers: {', '.join(tickers)}
+Error: {str(e)}
+Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"""
             send_webhook_notification(settings.WEBHOOK_URL, error_message)
 
 if __name__ == "__main__":
     main()
-EOF
+PYTHON_SCRIPT
+    
+    - name: Run Manual Stock Analysis
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+        MANUAL_TICKERS: ${{ github.event.inputs.tickers }}
+        MAX_STOCKS: ${{ github.event.inputs.max_stocks }}
+        ANALYSIS_DEPTH: ${{ github.event.inputs.analysis_depth }}
+        CREATE_CHARTS: ${{ github.event.inputs.create_charts }}
+        SEND_NOTIFICATION: ${{ github.event.inputs.send_notification }}
+      run: |
+        echo "Starting Manual Stock Analysis..."
+        echo "=================================="
+        echo "Input Parameters:"
+        echo "  - Tickers: $MANUAL_TICKERS"
+        echo "  - Max Stocks: $MAX_STOCKS"
+        echo "  - Analysis Depth: $ANALYSIS_DEPTH"
+        echo "  - Create Charts: $CREATE_CHARTS"
+        echo "  - Send Notification: $SEND_NOTIFICATION"
+        echo "=================================="
         
-        # Run the custom analysis
+        # Run the analysis
         python manual_analysis.py
     
-    - name: 📈 Analysis Results Summary
+    - name: Analysis Results Summary
       if: always()
       run: |
-        echo "📊 Analysis Results Summary"
-        echo "=========================="
+        echo "Analysis Results Summary"
+        echo "========================"
         
         # Count files
-        analysis_count=$(find analysis/ -name "*.json" 2>/dev/null | wc -l)
-        chart_count=$(find charts/ -name "*.png" 2>/dev/null | wc -l)
+        analysis_count=$(find analysis/ -name "*.json" 2>/dev/null | wc -l || echo "0")
+        chart_count=$(find charts/ -name "*.png" 2>/dev/null | wc -l || echo "0")
         
-        echo "📄 Analysis files: $analysis_count"
-        echo "📊 Chart files: $chart_count"
+        echo "Analysis files: $analysis_count"
+        echo "Chart files: $chart_count"
         
-        # Show latest files with timestamps
+        # Show latest files
         echo ""
-        echo "📁 Generated Files:"
-        echo "=================="
+        echo "Generated Files:"
+        echo "================"
         
-        if [ $analysis_count -gt 0 ]; then
-          echo "📄 Analysis Reports:"
-          find analysis/ -name "*.html" -o -name "*.txt" | head -3 | while read file; do
-            size=$(ls -lh "$file" | awk '{print $5}')
-            echo "  📋 $file ($size)"
+        if [ "$analysis_count" -gt 0 ]; then
+          echo "Analysis Reports:"
+          find analysis/ -name "*.html" -o -name "*.txt" 2>/dev/null | head -3 | while read file; do
+            if [ -f "$file" ]; then
+              size=$(ls -lh "$file" 2>/dev/null | awk '{print $5}')
+              echo "  $file ($size)"
+            fi
           done
         fi
         
-        if [ $chart_count -gt 0 ]; then
-          echo "📈 Technical Charts:"
-          find charts/ -name "*.png" | head -5 | while read file; do
-            size=$(ls -lh "$file" | awk '{print $5}')
-            echo "  📊 $file ($size)"
+        if [ "$chart_count" -gt 0 ]; then
+          echo "Technical Charts:"
+          find charts/ -name "*.png" 2>/dev/null | head -5 | while read file; do
+            if [ -f "$file" ]; then
+              size=$(ls -lh "$file" 2>/dev/null | awk '{print $5}')
+              echo "  $file ($size)"
+            fi
           done
         fi
         
         # Show disk usage
         echo ""
-        echo "💾 Storage Usage:"
+        echo "Storage Usage:"
         du -sh analysis/ charts/ 2>/dev/null || echo "No files generated"
     
-    - name: 💾 Commit Results
+    - name: Commit Results
       if: success()
       run: |
-        echo "💾 Committing analysis results..."
+        echo "Committing analysis results..."
         
         # Configure git
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Actions Bot"
         
         # Add all generated files
-        git add analysis/ charts/ data/ || true
+        git add analysis/ charts/ data/ 2>/dev/null || true
         
         # Check for changes
         if git diff --staged --quiet; then
-          echo "📝 No new files to commit"
+          echo "No new files to commit"
         else
-          # Create detailed commit message
-          commit_msg="📊 Manual stock analysis: ${{ github.event.inputs.tickers }}"
-          commit_msg="$commit_msg ($(date '+%Y-%m-%d %H:%M UTC'))"
-          commit_msg="$commit_msg - Depth: ${{ github.event.inputs.analysis_depth }}"
+          # Create commit message
+          commit_msg="Manual stock analysis: ${{ github.event.inputs.tickers }} ($(date '+%Y-%m-%d %H:%M UTC')) - Depth: ${{ github.event.inputs.analysis_depth }}"
           
           git commit -m "$commit_msg"
           git push
-          echo "✅ Results committed successfully"
+          echo "Results committed successfully"
         fi
     
-    - name: 📤 Upload Artifacts
+    - name: Upload Artifacts
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: manual-analysis-${{ github.event.inputs.tickers }}-${{ github.run_number }}
+        name: manual-analysis-results-${{ github.run_number }}
         path: |
           analysis/
           charts/
           *.log
+          manual_analysis.py
         retention-days: 30
+        if-no-files-found: warn
     
-    - name: 🎉 Completion Summary
+    - name: Completion Summary
       if: always()
       run: |
-        echo "🎉 Manual Analysis Complete!"
-        echo "============================"
-        echo "📊 Tickers: ${{ github.event.inputs.tickers }}"
-        echo "🔍 Depth: ${{ github.event.inputs.analysis_depth }}"
-        echo "📈 Max Stocks: ${{ github.event.inputs.max_stocks }}"
-        echo "📊 Charts: ${{ github.event.inputs.create_charts }}"
-        echo "🔔 Notifications: ${{ github.event.inputs.send_notification }}"
-        echo "⏰ Completed: $(date '+%Y-%m-%d %H:%M:%S UTC')"
+        echo "Manual Analysis Complete!"
+        echo "========================="
+        echo "Tickers: ${{ github.event.inputs.tickers }}"
+        echo "Depth: ${{ github.event.inputs.analysis_depth }}"
+        echo "Max Stocks: ${{ github.event.inputs.max_stocks }}"
+        echo "Charts: ${{ github.event.inputs.create_charts }}"
+        echo "Notifications: ${{ github.event.inputs.send_notification }}"
+        echo "Completed: $(date '+%Y-%m-%d %H:%M:%S UTC')"
         echo ""
-        echo "📁 View results in the 'analysis' and 'charts' directories"
-        echo "📥 Download artifacts from the Actions tab"
+        echo "View results in the 'analysis' and 'charts' directories"
+        echo "Download artifacts from the Actions tab"
         echo ""
         if [ "${{ job.status }}" = "success" ]; then
-          echo "✅ Status: SUCCESS"
+          echo "Status: SUCCESS"
         else
-          echo "❌ Status: FAILED"
+          echo "Status: FAILED"
         fi
