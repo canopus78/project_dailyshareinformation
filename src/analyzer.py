@@ -424,8 +424,6 @@ Please be specific, data-driven, and provide actionable insights. Use profession
             logging.error(f"Error in ChatGPT analysis for {stock_data.get('ticker')}: {str(e)}")
             return {
                 'ticker': stock_data.get('ticker'),
-                'error': str(
-                'ticker': stock_data.get('ticker'),
                 'error': str(e),
                 'analysis_date': datetime.now().isoformat()
             }
