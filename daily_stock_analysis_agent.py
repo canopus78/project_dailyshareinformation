@@ -118,40 +118,30 @@ class StockAnalyzer:
         return analysis_results
 
     def financial_metrics_analysis(self, stock):
-        data = self.financial_data.get(stock, {})
-        return data
+        return self.financial_data.get(stock, {})
 
     def technical_analysis(self, stock):
-        moving_average = np.random.uniform(0.95, 1.05)
-        rsi = np.random.uniform(30, 70)
         return {
-            'moving_average': moving_average,
-            'rsi': rsi
+            'moving_average': np.random.uniform(0.95, 1.05),
+            'rsi': np.random.uniform(30, 70)
         }
 
     def sector_analysis(self, stock):
         return self.sector_data.get(stock, 'Unknown')
 
     def risk_assessment(self, stock):
-        volatility = np.random.uniform(0.1, 0.3)
-        beta = np.random.uniform(0.8, 1.2)
         return {
-            'volatility': volatility,
-            'beta': beta
+            'volatility': np.random.uniform(0.1, 0.3),
+            'beta': np.random.uniform(0.8, 1.2)
         }
 
     def growth_potential(self, stock):
-        growth_score = np.random.uniform(1, 10)
-        return {
-            'growth_score': growth_score
-        }
+        return {'growth_score': np.random.uniform(1, 10)}
 
     def valuation_metrics(self, stock):
-        pe_ratio = np.random.uniform(10, 30)
-        pb_ratio = np.random.uniform(1, 5)
         return {
-            'pe_ratio': pe_ratio,
-            'pb_ratio': pb_ratio
+            'pe_ratio': np.random.uniform(10, 30),
+            'pb_ratio': np.random.uniform(1, 5)
         }
 
 class RecommendationEngine:
@@ -185,26 +175,16 @@ class RecommendationEngine:
                 'risk_level': risk_assessment['volatility'],
                 'diversification': self.evaluate_diversification(stock, sector)
             }
-
         return recommendations
 
     def evaluate_recommendation(self, stock, financial_metrics, technical_metrics,
                                 market_sentiment, risk_assessment, growth_potential,
                                 valuation_metrics, sector):
-        recommendation = "Hold"
-        confidence = "Medium"
-        reasoning = "Balanced financial and technical indicators."
-
         if financial_metrics.get('growth', 0) > 20 or 'AI leadership' in financial_metrics.get('notes', ''):
-            recommendation = "Buy"
-            confidence = "High"
-            reasoning = "Strong growth and leadership in key sectors."
-        elif risk_assessment['volatility'] > 0.25:
-            recommendation = "Sell"
-            confidence = "High"
-            reasoning = "High volatility and market uncertainty."
-
-        return recommendation, confidence, reasoning
+            return "Buy", "High", "Strong growth and leadership in key sectors."
+        if risk_assessment['volatility'] > 0.25:
+            return "Sell", "High", "High volatility and market uncertainty."
+        return "Hold", "Medium", "Balanced financial and technical indicators."
 
     def calculate_price_target(self, current_price, growth_potential):
         return current_price * (1 + growth_potential['growth_score'] / 100)
@@ -222,58 +202,27 @@ class ReportGenerator:
 
     def generate_executive_summary(self):
         market_sentiment = self.market_analyzer.analyze_factors()['overall_score']
-        summary = (
-            f"Executive Summary:\n"
-            f"Market Outlook: Short-term sentiment is {market_sentiment['short_term']:.2f}, "
-            f"Long-term sentiment is {market_sentiment['long_term']:.2f}.\n"
-        )
-        return summary
+        return f"Executive Summary:\nMarket Outlook: Short-term sentiment is {market_sentiment['short_term']:.2f}, Long-term sentiment is {market_sentiment['long_term']:.2f}.\n"
 
     def generate_market_factor_analysis(self):
         analysis = self.market_analyzer.analyze_factors()
-        return (
-            f"Market Factor Analysis:\n"
-            f"Fed Policy Score: {analysis['fed_policy_score']}\n"
-            f"Inflation Score: {analysis['inflation_score']}\n"
-            f"Geopolitical Risk Score: {analysis['geopolitical_risk_score']}\n"
-            f"Earnings Growth Score: {analysis['earnings_growth_score']}\n"
-            f"AI Momentum Score: {analysis['ai_momentum_score']}\n"
-        )
+        return f"Market Factor Analysis:\nFed Policy Score: {analysis['fed_policy_score']}\nInflation Score: {analysis['inflation_score']}\nGeopolitical Risk Score: {analysis['geopolitical_risk_score']}\nEarnings Growth Score: {analysis['earnings_growth_score']}\nAI Momentum Score: {analysis['ai_momentum_score']}\n"
 
     def generate_stock_analysis_and_recommendations(self):
         recommendations = self.recommendation_engine.generate_recommendations()
         analysis = "Stock Analysis and Recommendations:\n"
         for stock, details in recommendations.items():
-            analysis += (
-                f"\n{stock}:\n"
-                f"  Recommendation: {details['recommendation']}\n"
-                f"  Confidence: {details['confidence']}\n"
-                f"  Reasoning: {details['reasoning']}\n"
-                f"  Price Target: {details['price_target']:.2f}\n"
-                f"  Risk Level: {details['risk_level']:.2f}\n"
-                f"  Diversification: {details['diversification']}\n"
-            )
+            analysis += f"\n{stock}:\n  Recommendation: {details['recommendation']}\n  Confidence: {details['confidence']}\n  Reasoning: {details['reasoning']}\n  Price Target: {details['price_target']:.2f}\n  Risk Level: {details['risk_level']:.2f}\n  Diversification: {details['diversification']}\n"
         return analysis
 
     def generate_risk_assessment_and_portfolio_considerations(self):
-        risk_assessment = "Risk Assessment and Portfolio Considerations:\n"
-        risk_assessment += "  Consider diversifying across sectors to mitigate risks.\n"
-        return risk_assessment
+        return "Risk Assessment and Portfolio Considerations:\n  Consider diversifying across sectors to mitigate risks.\n"
 
     def generate_key_metrics_and_performance_indicators(self):
-        metrics = "Key Metrics and Performance Indicators:\n"
-        metrics += "  Monitor P/E ratios and earnings growth for valuation insights.\n"
-        return metrics
+        return "Key Metrics and Performance Indicators:\n  Monitor P/E ratios and earnings growth for valuation insights.\n"
 
     def compile_report(self):
-        report = (
-            self.generate_executive_summary() +
-            self.generate_market_factor_analysis() +
-            self.generate_stock_analysis_and_recommendations() +
-            self.generate_risk_assessment_and_portfolio_considerations() +
-            self.generate_key_metrics_and_performance_indicators()
-        )
-        return report
+        return self.generate_executive_summary() + self.generate_market_factor_analysis() + self.generate_stock_analysis_and_recommendations() + self.generate_risk_assessment_and_portfolio_considerations() + self.generate_key_metrics_and_performance_indicators()
 
     def save_report(self, report):
         text_file_path = self.output_dir / 'daily_report.txt'
@@ -308,7 +257,6 @@ class VisualizationManager:
         stock_data = self.stock_analyzer.stock_data
         stocks = list(stock_data.keys())
         prices = list(stock_data.values())
-
         plt.figure(figsize=(10, 6))
         plt.bar(stocks, prices, color='skyblue')
         plt.title('Stock Price Performance')
@@ -322,9 +270,7 @@ class VisualizationManager:
     def generate_market_sentiment_dashboard(self):
         scores = self.market_analyzer.analyze_factors()
         labels = ['Fed Policy', 'Inflation', 'Geopolitical Risk', 'Earnings Growth', 'AI Momentum']
-        values = [scores['fed_policy_score'], scores['inflation_score'], scores['geopolitical_risk_score'],
-                  scores['earnings_growth_score'], scores['ai_momentum_score']]
-
+        values = [scores['fed_policy_score'], scores['inflation_score'], scores['geopolitical_risk_score'], scores['earnings_growth_score'], scores['ai_momentum_score']]
         plt.figure(figsize=(10, 6))
         plt.bar(labels, values, color='lightgreen')
         plt.title('Market Sentiment Dashboard')
@@ -340,7 +286,6 @@ class VisualizationManager:
         stocks = list(analysis_results.keys())
         risks = [analysis_results[stock]['risk_assessment']['volatility'] for stock in stocks]
         returns = [analysis_results[stock]['financial_metrics'].get('growth', 0) for stock in stocks]
-
         plt.figure(figsize=(10, 6))
         plt.scatter(risks, returns, color='orange')
         for i, stock in enumerate(stocks):
@@ -353,10 +298,8 @@ class VisualizationManager:
         plt.close()
 
     def generate_sector_distribution_chart(self):
-        sector_data = self.stock_analyzer.sector_data
-        sectors = list(sector_data.values())
+        sectors = list(self.stock_analyzer.sector_data.values())
         sector_counts = pd.Series(sectors).value_counts()
-
         plt.figure(figsize=(8, 6))
         plt.pie(sector_counts, labels=sector_counts.index, autopct='%1.1f%%', startangle=140)
         plt.title('Sector Distribution')
@@ -367,7 +310,6 @@ class VisualizationManager:
     def generate_recommendation_summary_pie_chart(self):
         recommendations = self.recommendation_engine.generate_recommendations()
         recommendation_counts = pd.Series([rec['recommendation'] for rec in recommendations.values()]).value_counts()
-
         plt.figure(figsize=(8, 6))
         plt.pie(recommendation_counts, labels=recommendation_counts.index, autopct='%1.1f%%', startangle=140)
         plt.title('Recommendation Summary')
@@ -380,19 +322,15 @@ class VisualizationManager:
         stocks = list(analysis_results.keys())
         moving_averages = [analysis_results[stock]['technical_metrics']['moving_average'] for stock in stocks]
         rsis = [analysis_results[stock]['technical_metrics']['rsi'] for stock in stocks]
-
         fig, ax1 = plt.subplots(figsize=(10, 6))
-
         ax1.set_xlabel('Stocks')
         ax1.set_ylabel('Moving Average Multiplier', color='tab:blue')
         ax1.bar(stocks, moving_averages, color='tab:blue', alpha=0.6, label='Moving Average')
         ax1.tick_params(axis='y', labelcolor='tab:blue')
-
         ax2 = ax1.twinx()
         ax2.set_ylabel('RSI', color='tab:red')
         ax2.plot(stocks, rsis, color='tab:red', marker='o', label='RSI')
         ax2.tick_params(axis='y', labelcolor='tab:red')
-
         fig.tight_layout()
         plt.title('Technical Indicators Visualization')
         plt.xticks(rotation=45)
@@ -411,27 +349,20 @@ class DailyStockAnalysisAgent:
         self.setup_logging()
 
     def setup_logging(self):
-        logging.basicConfig(filename='analysis.log',
-                            level=logging.INFO,
-                            format='%(asctime)s - %(levelname)s - %(message)s')
+        logging.basicConfig(filename='analysis.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
         logging.info("DailyStockAnalysisAgent initialized.")
 
     def run_daily_analysis(self):
         logging.info("Starting daily stock market analysis.")
-        
         market_analysis = self.market_analyzer.analyze_factors()
         logging.info(f"Market analysis completed: {market_analysis}")
-        
         stock_analysis = self.stock_analyzer.analyze_stocks()
         logging.info(f"Stock analysis completed: {stock_analysis}")
-        
         recommendations = self.recommendation_engine.generate_recommendations()
         logging.info(f"Recommendations generated: {recommendations}")
-        
         comprehensive_report = self.report_generator.compile_report()
         self.report_generator.save_report(comprehensive_report)
         logging.info("Report generated and saved.")
-        
         self.visualization_manager.generate_stock_price_performance_chart()
         self.visualization_manager.generate_market_sentiment_dashboard()
         self.visualization_manager.generate_risk_return_scatter_plot()
@@ -439,7 +370,6 @@ class DailyStockAnalysisAgent:
         self.visualization_manager.generate_recommendation_summary_pie_chart()
         self.visualization_manager.generate_technical_indicators_visualization()
         logging.info("Visualizations generated.")
-        
         summary = self.generate_summary(market_analysis, stock_analysis, recommendations)
         print(summary)
         logging.info("Daily analysis completed successfully.")
@@ -453,14 +383,12 @@ class DailyStockAnalysisAgent:
         return summary
 
 def send_email_with_report(report_generator, visualization_manager):
-    # --- 이메일 모듈을 함수 안에서 직접 임포트하여 스코프 문제를 원천 차단 ---
     import smtplib
     from email.mime.text import MIMEText
     from email.mime.multipart import MIMEMultipart
     from email.mime.image import MIMEImage
     from email.mime.base import MIMEBase
     from email import encoders
-    # -------------------------------------------------------------
 
     gmail_user = os.environ.get('GMAIL_USERNAME')
     gmail_password = os.environ.get('GMAIL_PASSWORD')
@@ -475,24 +403,9 @@ def send_email_with_report(report_generator, visualization_manager):
     msg['Subject'] = f"📊 일일 주식 분석 리포트 - {current_date}"
     msg['From'] = gmail_user
     msg['To'] = recipient_email
-
+    
     summary = report_generator.generate_executive_summary()
-    html_body = f"""
-    <html>
-    <body style="font-family: Arial, sans-serif;">
-        <h2 style="color: #2E86AB;">📊 일일 주식 분석 리포트</h2>
-        <h3 style="color: #333;">📅 {current_date}</h3>
-        <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; font-size: 14px; line-height: 1.6;">
-            <pre>{summary}</pre>
-        </div>
-        <p>상세 내용은 첨부된 리포트 파일과 차트 이미지를 확인해주세요.</p>
-        <hr>
-        <p style="color: #6c757d; font-size: 12px;">
-            <em>🤖 이 리포트는 GitHub Actions를 통해 자동으로 생성되었습니다.</em>
-        </p>
-    </body>
-    </html>
-    """
+    html_body = f'<html><body style="font-family: Arial, sans-serif;"><h2 style="color: #2E86AB;">📊 일일 주식 분석 리포트</h2><h3 style="color: #333;">📅 {current_date}</h3><div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; font-size: 14px; line-height: 1.6;"><pre>{summary}</pre></div><p>상세 내용은 첨부된 리포트 파일과 차트 이미지를 확인해주세요.</p><hr><p style="color: #6c757d; font-size: 12px;"><em>🤖 이 리포트는 GitHub Actions를 통해 자동으로 생성되었습니다.</em></p></body></html>'
     msg.attach(MimeText(html_body, 'html'))
 
     attachments = [
@@ -502,7 +415,6 @@ def send_email_with_report(report_generator, visualization_manager):
         visualization_manager.output_dir / 'risk_return_scatter_plot.png',
         visualization_manager.output_dir / 'sector_distribution_chart.png',
     ]
-
     for file_path in attachments:
         try:
             with open(file_path, 'rb') as attachment:
@@ -512,11 +424,11 @@ def send_email_with_report(report_generator, visualization_manager):
                     part = MIMEBase('application', 'octet-stream')
                     part.set_payload(attachment.read())
                     encoders.encode_base64(part)
-                part.add_header('Content-Disposition', f'attachment; filename="{os.path.basename(file_path)}"')
+                part.add_header('Content-Disposition', f'attachment; filename="{os.path.basename(file_path)}"');
                 msg.attach(part)
         except FileNotFoundError:
             print(f"경고: 첨부 파일을 찾을 수 없습니다 - {file_path}")
-
+    
     try:
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
@@ -535,13 +447,11 @@ if __name__ == "__main__":
             config = json.load(f)
         market_factors = config['market_factors']
         stock_data = config['stock_data']
-
+        
         analysis_agent = DailyStockAnalysisAgent(market_factors, stock_data)
         
-        # 분석과 이메일 발송을 순차적으로 실행
         analysis_agent.run_daily_analysis()
         send_email_with_report(analysis_agent.report_generator, analysis_agent.visualization_manager)
-
     except Exception as e:
         logging.error(f"스크립트 실행 중 치명적인 오류 발생: {e}", exc_info=True)
         print(f"스크립트 실행 중 치명적인 오류 발생: {e}")
