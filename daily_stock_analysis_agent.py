@@ -224,7 +224,7 @@ class ReportGenerator:
         self.market_analyzer = market_analyzer
         self.stock_analyzer = stock_analyzer
         self.recommendation_engine = recommendation_engine
-        self.output_dir = Path('reports')  # 상대 경로로 수정
+        self.output_dir = Path('reports')
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
     def generate_executive_summary(self):
@@ -305,9 +305,9 @@ class VisualizationManager:
         self.stock_analyzer = stock_analyzer
         self.market_analyzer = market_analyzer
         self.recommendation_engine = recommendation_engine
-        self.output_dir = Path('visualizations') # 상대 경로로 수정
+        self.output_dir = Path('visualizations')
         self.output_dir.mkdir(parents=True, exist_ok=True)
-        plt.rcParams['font.family'] = ['Noto Sans CJK JP', 'NanumGothic'] # 나눔고딕 폰트 추가
+        plt.rcParams['font.family'] = ['Noto Sans CJK JP', 'NanumGothic']
         plt.rcParams['figure.dpi'] = 100
         plt.rcParams['savefig.dpi'] = 300
 
@@ -324,7 +324,7 @@ class VisualizationManager:
         plt.xticks(rotation=45)
         plt.tight_layout()
         plt.savefig(self.output_dir / 'stock_price_performance.png')
-        plt.show()
+        plt.close() # plt.show() 대신 plt.close() 사용
 
     def generate_market_sentiment_dashboard(self):
         scores = self.market_analyzer.analyze_factors()
@@ -340,13 +340,12 @@ class VisualizationManager:
         plt.ylim(0, 10)
         plt.tight_layout()
         plt.savefig(self.output_dir / 'market_sentiment_dashboard.png')
-        plt.show()
+        plt.close() # plt.show() 대신 plt.close() 사용
 
     def generate_risk_return_scatter_plot(self):
         analysis_results = self.stock_analyzer.analyze_stocks()
         stocks = list(analysis_results.keys())
         risks = [analysis_results[stock]['risk_assessment']['volatility'] for stock in stocks]
-        # 'earnings_growth'를 'growth'로 바꾸고, .get()을 사용해 키가 없을 경우 기본값 0을 반환하도록 수정
         returns = [analysis_results[stock]['financial_metrics'].get('growth', 0) for stock in stocks]
 
         plt.figure(figsize=(10, 6))
@@ -358,7 +357,7 @@ class VisualizationManager:
         plt.ylabel('Earnings Growth (Return)')
         plt.tight_layout()
         plt.savefig(self.output_dir / 'risk_return_scatter_plot.png')
-        plt.show()
+        plt.close() # plt.show() 대신 plt.close() 사용
 
     def generate_sector_distribution_chart(self):
         sector_data = self.stock_analyzer.sector_data
@@ -370,7 +369,7 @@ class VisualizationManager:
         plt.title('Sector Distribution')
         plt.tight_layout()
         plt.savefig(self.output_dir / 'sector_distribution_chart.png')
-        plt.show()
+        plt.close() # plt.show() 대신 plt.close() 사용
 
     def generate_recommendation_summary_pie_chart(self):
         recommendations = self.recommendation_engine.generate_recommendations()
@@ -381,7 +380,7 @@ class VisualizationManager:
         plt.title('Recommendation Summary')
         plt.tight_layout()
         plt.savefig(self.output_dir / 'recommendation_summary_pie_chart.png')
-        plt.show()
+        plt.close() # plt.show() 대신 plt.close() 사용
 
     def generate_technical_indicators_visualization(self):
         analysis_results = self.stock_analyzer.analyze_stocks()
@@ -405,7 +404,7 @@ class VisualizationManager:
         plt.title('Technical Indicators Visualization')
         plt.xticks(rotation=45)
         plt.savefig(self.output_dir / 'technical_indicators_visualization.png')
-        plt.show()
+        plt.close() # plt.show() 대신 plt.close() 사용
 
 class DailyStockAnalysisAgent:
     def __init__(self, market_factors, stock_data):
@@ -419,7 +418,7 @@ class DailyStockAnalysisAgent:
         self.setup_logging()
 
     def setup_logging(self):
-        logging.basicConfig(filename='analysis.log', # 상대 경로로 수정
+        logging.basicConfig(filename='analysis.log',
                             level=logging.INFO,
                             format='%(asctime)s - %(levelname)s - %(message)s')
         logging.info("DailyStockAnalysisAgent initialized.")
@@ -441,24 +440,19 @@ class DailyStockAnalysisAgent:
         try:
             logging.info("Starting daily stock market analysis.")
 
-            # Analyze market factors
             market_analysis = self.market_analyzer.analyze_factors()
             logging.info(f"Market analysis completed: {market_analysis}")
 
-            # Analyze stocks
             stock_analysis = self.stock_analyzer.analyze_stocks()
             logging.info(f"Stock analysis completed: {stock_analysis}")
 
-            # Generate recommendations
             recommendations = self.recommendation_engine.generate_recommendations()
             logging.info(f"Recommendations generated: {recommendations}")
 
-            # Generate report
             comprehensive_report = self.report_generator.compile_report()
             self.report_generator.save_report(comprehensive_report)
             logging.info("Report generated and saved.")
 
-            # Generate visualizations
             self.visualization_manager.generate_stock_price_performance_chart()
             self.visualization_manager.generate_market_sentiment_dashboard()
             self.visualization_manager.generate_risk_return_scatter_plot()
@@ -467,7 +461,6 @@ class DailyStockAnalysisAgent:
             self.visualization_manager.generate_technical_indicators_visualization()
             logging.info("Visualizations generated.")
 
-            # Output summary
             summary = self.generate_summary(market_analysis, stock_analysis, recommendations)
             print(summary)
             logging.info("Daily analysis completed successfully.")
@@ -475,7 +468,7 @@ class DailyStockAnalysisAgent:
         except Exception as e:
             logging.error(f"Error during daily analysis: {e}")
             print(f"An error occurred during the analysis: {e}")
-            raise # 에러를 다시 발생시켜서 GitHub Actions가 실패로 인식하게 함
+            raise
 
     def generate_summary(self, market_analysis, stock_analysis, recommendations):
         summary = "Daily Stock Market Analysis Summary:\n"
@@ -486,9 +479,6 @@ class DailyStockAnalysisAgent:
         return summary
 
 def send_email_with_report(report_generator, visualization_manager):
-    """
-    분석 리포트와 시각화 자료를 이메일로 전송하는 함수
-    """
     gmail_user = os.environ.get('GMAIL_USERNAME')
     gmail_password = os.environ.get('GMAIL_PASSWORD')
     recipient_email = os.environ.get('RECIPIENT_EMAIL')
@@ -497,14 +487,12 @@ def send_email_with_report(report_generator, visualization_manager):
         print("⚠️ 이메일 관련 환경 변수가 설정되지 않아 이메일을 발송할 수 없습니다.")
         return
 
-    # 이메일 메시지 생성
     msg = MIMEMultipart()
     current_date = datetime.now().strftime('%Y-%m-%d')
     msg['Subject'] = f"📊 일일 주식 분석 리포트 - {current_date}"
     msg['From'] = gmail_user
     msg['To'] = recipient_email
 
-    # HTML 본문 생성 (요약 정보 포함)
     summary = report_generator.generate_executive_summary()
     html_body = f"""
     <html>
@@ -524,7 +512,6 @@ def send_email_with_report(report_generator, visualization_manager):
     """
     msg.attach(MimeText(html_body, 'html'))
 
-    # 첨부 파일 추가 (리포트, 차트)
     attachments = [
         report_generator.output_dir / 'daily_report.txt',
         visualization_manager.output_dir / 'stock_price_performance.png',
@@ -542,13 +529,12 @@ def send_email_with_report(report_generator, visualization_manager):
                     part = MIMEBase('application', 'octet-stream')
                     part.set_payload(attachment.read())
                     encoders.encode_base64(part)
-                part.add_header('Content-Disposition', f'attachment; filename= {os.path.basename(file_path)}')
+                part.add_header('Content-Disposition', f'attachment; filename="{os.path.basename(file_path)}"')
                 msg.attach(part)
         except FileNotFoundError:
             print(f"경고: 첨부 파일을 찾을 수 없습니다 - {file_path}")
 
 
-    # Gmail SMTP 서버를 통해 이메일 발송
     try:
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
@@ -562,26 +548,17 @@ def send_email_with_report(report_generator, visualization_manager):
 
 if __name__ == "__main__":
     try:
-        # 설정 파일 로드
-        config_path = 'config.json' # '.json' 확장자 포함
+        config_path = 'config.json'
         with open(config_path, 'r') as f:
             config = json.load(f)
         market_factors = config['market_factors']
         stock_data = config['stock_data']
 
-        # 에이전트 실행
         analysis_agent = DailyStockAnalysisAgent(market_factors, stock_data)
         analysis_agent.run_daily_analysis()
 
-        # 이메일 발송
         send_email_with_report(analysis_agent.report_generator, analysis_agent.visualization_manager)
 
-    except FileNotFoundError:
-        print(f"오류: 설정 파일 '{config_path}'을 찾을 수 없습니다.")
-        raise
-    except json.JSONDecodeError:
-        print(f"오류: 설정 파일 '{config_path}'의 형식이 올바르지 않습니다.")
-        raise
     except Exception as e:
         logging.error(f"스크립트 실행 중 치명적인 오류 발생: {e}")
         print(f"스크립트 실행 중 치명적인 오류 발생: {e}")
