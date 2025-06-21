@@ -1,75 +1,239 @@
 name: Stock Analysis Pipeline
 
 on:
-  schedule:
-    # Run every weekday at 9 AM and 3 PM EST
-    - cron: '0 14 * * 1-5'  # 9 AM EST (14:00 UTC)
-    - cron: '0 20 * * 1-5'  # 3 PM EST (20:00 UTC)
-  workflow_dispatch:  # Allow manual trigger
+  # Scheduled runs - weekdays at 9 AM and 3 PM EST
+  # schedule:
+  #   - cron: '0 14 * * 1-5'  # 9 AM EST (14:00 UTC)
+  #   - cron: '0 20 * * 1-5'  # 3 PM EST (20:00 UTC)
+  
+  # Manual trigger - this enables the "Run workflow" button
+  workflow_dispatch:
     inputs:
       tickers:
-        description: 'Comma-separated list of stock tickers (optional)'
+        description: 'Stock tickers to analyze (comma-separated, e.g., AAPL,GOOGL,MSFT)'
         required: false
-        default: ''
+        default: 'AAPL,GOOGL,MSFT,TSLA,NVDA'
+        type: string
+      max_stocks:
+        description: 'Maximum number of stocks to analyze'
+        required: false
+        default: '8'
+        type: choice
+        options:
+        - '3'
+        - '5'
+        - '8'
+        - '10'
+      send_notification:
+        description: 'Send webhook notification'
+        required: false
+        default: true
+        type: boolean
+
+  # Also trigger on push to main branch (for testing)
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - 'README.md'
+      - 'analysis/**'
+      - 'charts/**'
+      - 'data/**'
 
 jobs:
   analyze-stocks:
     runs-on: ubuntu-latest
+    timeout-minutes: 30  # Prevent long-running jobs
     
     steps:
-    - name: Checkout repository
+    - name: 📥 Checkout repository
       uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
     
-    - name: Set up Python
+    - name: 🐍 Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.9'
+        cache: 'pip'
     
-    - name: Install dependencies
+    - name: 📦 Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     
-    - name: Run stock analysis
+    - name: 🔧 Verify environment
+      run: |
+        python --version
+        pip list
+        echo "Current directory: $(pwd)"
+        echo "Directory contents:"
+        ls -la
+    
+    - name: 📊 Run stock analysis
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+        # Pass workflow inputs as environment variables
         CUSTOM_TICKERS: ${{ github.event.inputs.tickers }}
+        MAX_STOCKS: ${{ github.event.inputs.max_stocks }}
+        SEND_NOTIFICATION: ${{ github.event.inputs.send_notification }}
       run: |
-        # Use custom tickers if provided, otherwise use defaults
-        if [ -n "$CUSTOM_TICKERS" ]; then
-          echo "Using custom tickers: $CUSTOM_TICKERS"
-          python -c "
+        echo "🚀 Starting stock analysis..."
+        echo "Trigger event: ${{ github.event_name }}"
+        
+        # Check if this is a manual run with custom inputs
+        if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "$CUSTOM_TICKERS" ]; then
+          echo "📋 Manual run with custom tickers: $CUSTOM_TICKERS"
+          echo "📊 Max stocks: $MAX_STOCKS"
+          
+          # Create a custom Python script for manual runs
+          cat > run_custom_analysis.py << 'EOF'
 import os
 import sys
 sys.path.append('src')
+
 from src.analyzer import YahooFinanceNewsAnalyzer
-from src.utils import setup_logging
+from src.utils import setup_logging, send_webhook_notification
 from config.settings import settings
 
-setup_logging()
-tickers = [t.strip().upper() for t in '$CUSTOM_TICKERS'.split(',') if t.strip()]
-analyzer = YahooFinanceNewsAnalyzer()
-results = analyzer.run_complete_analysis(tickers)
-print(f'Analysis completed for: {tickers}')
-"
+def main():
+    setup_logging()
+    
+    # Get custom parameters
+    custom_tickers = os.getenv('CUSTOM_TICKERS', '').strip()
+    max_stocks = int(os.getenv('MAX_STOCKS', '8'))
+    send_notification = os.getenv('SEND_NOTIFICATION', 'true').lower() == 'true'
+    
+    if custom_tickers:
+        tickers = [t.strip().upper() for t in custom_tickers.split(',') if t.strip()]
+        tickers = tickers[:max_stocks]  # Limit number of stocks
+    else:
+        tickers = settings.DEFAULT_TICKERS[:max_stocks]
+    
+    print(f"🎯 Analyzing tickers: {tickers}")
+    print(f"📊 Total stocks: {len(tickers)}")
+    
+    # Run analysis
+    analyzer = YahooFinanceNewsAnalyzer()
+    results = analyzer.run_complete_analysis(tickers)
+    
+    # Send notification if requested
+    if send_notification and settings.WEBHOOK_URL:
+        message = f"📊 Stock Analysis Complete!\n"
+        message += f"Analyzed: {', '.join(tickers)}\n"
+        message += f"Success: {results['summary']['successful_analyses']}/{results['summary']['total_stocks']}"
+        send_webhook_notification(settings.WEBHOOK_URL, message)
+    
+    print("✅ Analysis completed successfully!")
+
+if __name__ == "__main__":
+    main()
+EOF
+          
+          python run_custom_analysis.py
         else
+          echo "📋 Running default analysis..."
           python main.py
         fi
     
-    - name: Commit and push results
+    - name: 📈 Generate summary
+      if: always()
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add analysis/ charts/ data/ || true
-        git commit -m "📊 Update stock analysis $(date '+%Y-%m-%d %H:%M')" || exit 0
-        git push
+        echo "📊 Analysis Summary:"
+        echo "==================="
+        
+        # Count generated files
+        analysis_files=$(find analysis/ -name "*.json" -o -name "*.txt" -o -name "*.html" 2>/dev/null | wc -l)
+        chart_files=$(find charts/ -name "*.png" 2>/dev/null | wc -l)
+        
+        echo "📄 Analysis files generated: $analysis_files"
+        echo "📊 Chart files generated: $chart_files"
+        
+        # Show latest files
+        echo ""
+        echo "📁 Latest analysis files:"
+        find analysis/ -type f -name "*.html" -o -name "*.txt" | head -3 | while read file; do
+          echo "  - $file"
+        done
+        
+        echo ""
+        echo "📈 Latest chart files:"
+        find charts/ -type f -name "*.png" | head -5 | while read file; do
+          echo "  - $file"
+        done
     
-    - name: Upload analysis artifacts
-      uses: actions/upload-artifact@v3
+    - name: 💾 Commit and push results
+      if: success()
+      run: |
+        # Configure git
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action Bot"
+        
+        # Add files
+        git add analysis/ charts/ data/ || true
+        
+        # Check if there are changes to commit
+        if git diff --staged --quiet; then
+          echo "📝 No changes to commit"
+        else
+          # Create commit with detailed message
+          commit_msg="📊 Stock analysis update $(date '+%Y-%m-%d %H:%M UTC')"
+          
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            commit_msg="$commit_msg (manual run)"
+            if [ -n "${{ github.event.inputs.tickers }}" ]; then
+              commit_msg="$commit_msg - Tickers: ${{ github.event.inputs.tickers }}"
+            fi
+          else
+            commit_msg="$commit_msg (scheduled)"
+          fi
+          
+          git commit -m "$commit_msg"
+          git push
+          echo "✅ Results committed and pushed"
+        fi
+    
+    - name: 📤 Upload analysis artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
       with:
-        name: stock-analysis-results
+        name: stock-analysis-results-${{ github.run_number }}
         path: |
           analysis/
           charts/
+          *.log
         retention-days: 30
+        if-no-files-found: warn
+    
+    - name: 🔔 Send completion notification
+      if: always() && secrets.WEBHOOK_URL
+      run: |
+        # Determine status
+        if [ "${{ job.status }}" = "success" ]; then
+          status_emoji="✅"
+          status_text="Success"
+        else
+          status_emoji="❌" 
+          status_text="Failed"
+        fi
+        
+        # Create notification message
+        message="$status_emoji **Stock Analysis $status_text**
+        
+**Repository:** ${{ github.repository }}
+**Trigger:** ${{ github.event_name }}
+**Run:** #${{ github.run_number }}
+**Time:** $(date '+%Y-%m-%d %H:%M UTC')
+
+**View Results:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+        # Add custom tickers info if manual run
+        if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ github.event.inputs.tickers }}" ]; then
+          message="$message
+**Custom Tickers:** ${{ github.event.inputs.tickers }}"
+        fi
+        
+        # Send notification
+        curl -X POST "${{ secrets.WEBHOOK_URL }}" \
+          -H "Content-Type: application/json" \
+          -d "{\"text\":\"$message\"}" || echo "Failed to send notification"
