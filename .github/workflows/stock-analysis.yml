@@ -4,24 +4,23 @@ on:
   workflow_dispatch:
     inputs:
       tickers:
-        description: 'Stock tickers to analyze (comma-separated, e.g., AAPL,GOOGL,MSFT)'
+        description: 'Stock tickers (comma-separated, e.g. AAPL,GOOGL,MSFT)'
         required: true
-        default: 'AAPL,GOOGL,MSFT,TSLA,NVDA'
+        default: 'AAPL,GOOGL,MSFT'
         type: string
       
       max_stocks:
-        description: 'Maximum number of stocks to analyze'
+        description: 'Maximum stocks to analyze'
         required: false
-        default: '5'
+        default: '3'
         type: choice
         options:
         - '3'
         - '5'
         - '8'
-        - '10'
       
-      analysis_depth:
-        description: 'Analysis depth'
+      analysis_mode:
+        description: 'Analysis mode'
         required: false
         default: 'standard'
         type: choice
@@ -29,233 +28,185 @@ on:
         - 'quick'
         - 'standard'
         - 'detailed'
-      
-      send_notification:
-        description: 'Send webhook notification when complete'
-        required: false
-        default: true
-        type: boolean
-      
-      create_charts:
-        description: 'Generate technical analysis charts'
-        required: false
-        default: true
-        type: boolean
 
 jobs:
   analyze-stocks:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 30
     
     steps:
-    - name: Checkout Code
+    - name: Checkout repository
       uses: actions/checkout@v4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
     
-    - name: Setup Python
+    - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.9'
         cache: 'pip'
     
-    - name: Install Dependencies
+    - name: Install dependencies
       run: |
-        echo "Installing Python packages..."
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        echo "Dependencies installed successfully"
     
-    - name: Verify Setup
+    - name: Verify environment
       run: |
-        echo "Verifying environment..."
+        echo "Python version:"
         python --version
-        echo "Current directory: $(pwd)"
-        echo "Project structure:"
-        find . -type f -name "*.py" | head -10
-        echo "Checking API key..."
-        if [ -z "${{ secrets.OPENAI_API_KEY }}" ]; then
-          echo "ERROR: OPENAI_API_KEY not found in secrets!"
+        echo "Current directory:"
+        pwd
+        echo "Files in current directory:"
+        ls -la
+        echo "Python files found:"
+        find . -name "*.py" -type f | head -10
+    
+    - name: Check API key
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      run: |
+        if [ -z "$OPENAI_API_KEY" ]; then
+          echo "ERROR: OPENAI_API_KEY not found in repository secrets!"
+          echo "Please add your OpenAI API key to repository secrets."
           exit 1
         else
-          echo "OPENAI_API_KEY found"
+          echo "API key found - ready to proceed"
         fi
     
-    - name: Run Manual Stock Analysis
+    - name: Create custom runner script
+      run: |
+        echo 'import os' > run_analysis.py
+        echo 'import sys' >> run_analysis.py
+        echo 'sys.path.append("src")' >> run_analysis.py
+        echo '' >> run_analysis.py
+        echo 'def main():' >> run_analysis.py
+        echo '    try:' >> run_analysis.py
+        echo '        from config.settings import settings' >> run_analysis.py
+        echo '        from src.analyzer import YahooFinanceNewsAnalyzer' >> run_analysis.py
+        echo '        from src.utils import setup_logging' >> run_analysis.py
+        echo '        ' >> run_analysis.py
+        echo '        setup_logging()' >> run_analysis.py
+        echo '        ' >> run_analysis.py
+        echo '        # Get parameters from environment' >> run_analysis.py
+        echo '        tickers_input = os.getenv("INPUT_TICKERS", "AAPL,GOOGL,MSFT")' >> run_analysis.py
+        echo '        max_stocks = int(os.getenv("INPUT_MAX_STOCKS", "3"))' >> run_analysis.py
+        echo '        mode = os.getenv("INPUT_MODE", "standard")' >> run_analysis.py
+        echo '        ' >> run_analysis.py
+        echo '        # Process tickers' >> run_analysis.py
+        echo '        tickers = [t.strip().upper() for t in tickers_input.split(",")]' >> run_analysis.py
+        echo '        tickers = tickers[:max_stocks]' >> run_analysis.py
+        echo '        ' >> run_analysis.py
+        echo '        print(f"Analyzing tickers: {tickers}")' >> run_analysis.py
+        echo '        print(f"Mode: {mode}")' >> run_analysis.py
+        echo '        ' >> run_analysis.py
+        echo '        # Adjust settings based on mode' >> run_analysis.py
+        echo '        if mode == "quick":' >> run_analysis.py
+        echo '            settings.MAX_TOKENS = 1500' >> run_analysis.py
+        echo '        elif mode == "detailed":' >> run_analysis.py
+        echo '            settings.MAX_TOKENS = 3000' >> run_analysis.py
+        echo '        ' >> run_analysis.py
+        echo '        # Run analysis' >> run_analysis.py
+        echo '        analyzer = YahooFinanceNewsAnalyzer()' >> run_analysis.py
+        echo '        results = analyzer.run_complete_analysis(tickers)' >> run_analysis.py
+        echo '        ' >> run_analysis.py
+        echo '        print("Analysis completed successfully!")' >> run_analysis.py
+        echo '        print(f"Analyzed {len(results[\"individual_analyses\"])} stocks")' >> run_analysis.py
+        echo '        ' >> run_analysis.py
+        echo '    except Exception as e:' >> run_analysis.py
+        echo '        print(f"Error: {str(e)}")' >> run_analysis.py
+        echo '        import traceback' >> run_analysis.py
+        echo '        traceback.print_exc()' >> run_analysis.py
+        echo '        sys.exit(1)' >> run_analysis.py
+        echo '' >> run_analysis.py
+        echo 'if __name__ == "__main__":' >> run_analysis.py
+        echo '    main()' >> run_analysis.py
+    
+    - name: Run stock analysis
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-        MANUAL_TICKERS: ${{ github.event.inputs.tickers }}
-        MAX_STOCKS: ${{ github.event.inputs.max_stocks }}
-        ANALYSIS_DEPTH: ${{ github.event.inputs.analysis_depth }}
-        CREATE_CHARTS: ${{ github.event.inputs.create_charts }}
-        SEND_NOTIFICATION: ${{ github.event.inputs.send_notification }}
+        INPUT_TICKERS: ${{ github.event.inputs.tickers }}
+        INPUT_MAX_STOCKS: ${{ github.event.inputs.max_stocks }}
+        INPUT_MODE: ${{ github.event.inputs.analysis_mode }}
       run: |
-        echo "Starting Manual Stock Analysis..."
-        echo "=================================="
-        echo "Input Parameters:"
-        echo "  - Tickers: $MANUAL_TICKERS"
-        echo "  - Max Stocks: $MAX_STOCKS"
-        echo "  - Analysis Depth: $ANALYSIS_DEPTH"
-        echo "  - Create Charts: $CREATE_CHARTS"
-        echo "  - Send Notification: $SEND_NOTIFICATION"
-        echo "=================================="
+        echo "Starting analysis with parameters:"
+        echo "Tickers: $INPUT_TICKERS"
+        echo "Max stocks: $INPUT_MAX_STOCKS"
+        echo "Mode: $INPUT_MODE"
+        echo "===================="
         
-        # Create a simple Python runner that uses the existing main.py
-        python -c "
-import os
-import sys
-sys.path.append('src')
-
-# Set custom parameters as environment variables for main.py to use
-tickers = os.getenv('MANUAL_TICKERS', '').strip()
-if tickers:
-    # Override the default tickers in settings
-    tickers_list = [t.strip().upper() for t in tickers.split(',') if t.strip()]
-    max_stocks = int(os.getenv('MAX_STOCKS', '5'))
-    tickers_list = tickers_list[:max_stocks]
+        python run_analysis.py
     
-    print(f'Custom tickers: {tickers_list}')
-    
-    # Temporarily modify the settings
-    from config.settings import settings
-    settings.DEFAULT_TICKERS = tickers_list
-    
-    # Adjust analysis depth
-    analysis_depth = os.getenv('ANALYSIS_DEPTH', 'standard')
-    if analysis_depth == 'quick':
-        settings.MAX_TOKENS = 1500
-        settings.TEMPERATURE = 0.5
-    elif analysis_depth == 'detailed':
-        settings.MAX_TOKENS = 3000
-        settings.TEMPERATURE = 0.2
-    
-    print(f'Analysis depth: {analysis_depth}')
-    print(f'Max tokens: {settings.MAX_TOKENS}')
-
-# Import and run main
-try:
-    from main import main
-    main()
-except Exception as e:
-    print(f'Error running analysis: {str(e)}')
-    import traceback
-    traceback.print_exc()
-    sys.exit(1)
-"
-    
-    - name: Analysis Results Summary
+    - name: Check results
       if: always()
       run: |
-        echo "Analysis Results Summary"
-        echo "========================"
-        
-        # Count files
-        analysis_count=0
-        chart_count=0
+        echo "Checking generated files..."
         
         if [ -d "analysis" ]; then
-          analysis_count=$(find analysis/ -name "*.json" -o -name "*.html" -o -name "*.txt" 2>/dev/null | wc -l)
+          echo "Analysis directory contents:"
+          ls -la analysis/ || echo "Analysis directory is empty"
+          analysis_files=$(find analysis/ -type f | wc -l)
+          echo "Analysis files count: $analysis_files"
+        else
+          echo "Analysis directory not found"
         fi
         
         if [ -d "charts" ]; then
-          chart_count=$(find charts/ -name "*.png" 2>/dev/null | wc -l)
-        fi
-        
-        echo "Analysis files: $analysis_count"
-        echo "Chart files: $chart_count"
-        
-        # Show latest files
-        echo ""
-        echo "Generated Files:"
-        echo "================"
-        
-        if [ "$analysis_count" -gt 0 ]; then
-          echo "Analysis Reports:"
-          find analysis/ -type f 2>/dev/null | head -5 | while read file; do
-            if [ -f "$file" ]; then
-              size=$(ls -lh "$file" 2>/dev/null | awk '{print $5}' || echo "unknown")
-              echo "  $file ($size)"
-            fi
-          done
-        fi
-        
-        if [ "$chart_count" -gt 0 ]; then
-          echo "Technical Charts:"
-          find charts/ -type f -name "*.png" 2>/dev/null | head -5 | while read file; do
-            if [ -f "$file" ]; then
-              size=$(ls -lh "$file" 2>/dev/null | awk '{print $5}' || echo "unknown")
-              echo "  $file ($size)"
-            fi
-          done
-        fi
-        
-        # Show disk usage
-        echo ""
-        echo "Storage Usage:"
-        if [ -d "analysis" ] || [ -d "charts" ]; then
-          du -sh analysis/ charts/ 2>/dev/null || echo "Could not calculate size"
+          echo "Charts directory contents:"
+          ls -la charts/ || echo "Charts directory is empty"
+          chart_files=$(find charts/ -type f | wc -l)
+          echo "Chart files count: $chart_files"
         else
-          echo "No directories created"
+          echo "Charts directory not found"
         fi
     
-    - name: Commit Results
+    - name: Commit results
       if: success()
       run: |
-        echo "Committing analysis results..."
-        
-        # Configure git
         git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Actions Bot"
+        git config --local user.name "GitHub Action"
         
-        # Add all generated files
-        git add . 2>/dev/null || true
+        # Add generated files
+        git add analysis/ charts/ data/ 2>/dev/null || true
         
-        # Check for changes
-        if git diff --staged --quiet; then
-          echo "No new files to commit"
-        else
-          # Create commit message
-          timestamp=$(date '+%Y-%m-%d %H:%M UTC')
-          commit_msg="Manual stock analysis: ${{ github.event.inputs.tickers }} ($timestamp)"
-          
-          git commit -m "$commit_msg"
+        # Check if there are changes
+        if ! git diff --staged --quiet; then
+          timestamp=$(date '+%Y%m%d_%H%M%S')
+          git commit -m "Stock analysis results: ${{ github.event.inputs.tickers }} - $timestamp"
           git push
           echo "Results committed successfully"
+        else
+          echo "No changes to commit"
         fi
     
-    - name: Upload Artifacts
+    - name: Upload results as artifacts
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: manual-analysis-results-${{ github.run_number }}
+        name: analysis-results-${{ github.run_number }}
         path: |
           analysis/
           charts/
-          *.log
+          run_analysis.py
         retention-days: 30
         if-no-files-found: warn
     
-    - name: Completion Summary
+    - name: Summary
       if: always()
       run: |
-        echo "=================================="
-        echo "Manual Analysis Complete!"
-        echo "=================================="
+        echo "================================"
+        echo "ANALYSIS SUMMARY"
+        echo "================================"
         echo "Tickers: ${{ github.event.inputs.tickers }}"
-        echo "Depth: ${{ github.event.inputs.analysis_depth }}"
         echo "Max Stocks: ${{ github.event.inputs.max_stocks }}"
-        echo "Charts: ${{ github.event.inputs.create_charts }}"
-        echo "Notifications: ${{ github.event.inputs.send_notification }}"
-        echo "Completed: $(date '+%Y-%m-%d %H:%M:%S UTC')"
-        echo ""
-        echo "Results are available in:"
-        echo "- Repository: analysis/ and charts/ directories"
-        echo "- Artifacts: Download from Actions tab"
-        echo ""
+        echo "Mode: ${{ github.event.inputs.analysis_mode }}"
+        echo "Status: ${{ job.status }}"
+        echo "Time: $(date)"
+        echo "================================"
+        
         if [ "${{ job.status }}" = "success" ]; then
-          echo "Status: SUCCESS ✅"
+          echo "✅ Analysis completed successfully!"
+          echo "📁 Check the 'analysis' and 'charts' directories for results"
+          echo "📥 Download artifacts from the Actions tab"
         else
-          echo "Status: FAILED ❌"
+          echo "❌ Analysis failed - check the logs above"
         fi
-        echo "=================================="
