@@ -561,7 +561,7 @@ def send_email_with_report(report_generator, visualization_manager):
 
 if __name__ == "__main__":
     # 설정 파일 로드
-    config_path = 'config' # 파일 이름을 'config'로 가정
+    config_path = 'config.json' # 파일 이름을 'config'로 가정
     try:
         with open(config_path, 'r') as f:
             config = json.load(f)
