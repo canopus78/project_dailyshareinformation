@@ -109,7 +109,7 @@ jobs:
         echo '        results = analyzer.run_complete_analysis(tickers)' >> run_analysis.py
         echo '        ' >> run_analysis.py
         echo '        print("Analysis completed successfully!")' >> run_analysis.py
-        echo '        print(f"Analyzed {len(results[\"individual_analyses\"])} stocks")' >> run_analysis.py
+        echo '        print(f"Analyzed {len(results[\'individual_analyses\'])} stocks")' >> run_analysis.py
         echo '        ' >> run_analysis.py
         echo '    except Exception as e:' >> run_analysis.py
         echo '        print(f"Error: {str(e)}")' >> run_analysis.py
