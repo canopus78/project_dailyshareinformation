@@ -225,7 +225,7 @@ class ReportGenerator:
         self.market_analyzer = market_analyzer
         self.stock_analyzer = stock_analyzer
         self.recommendation_engine = recommendation_engine
-        self.output_dir = Path('/home/user/stock_analysis/reports')
+        self.output_dir = Path('reports')
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
     def generate_executive_summary(self):
@@ -306,7 +306,7 @@ class VisualizationManager:
         self.stock_analyzer = stock_analyzer
         self.market_analyzer = market_analyzer
         self.recommendation_engine = recommendation_engine
-        self.output_dir = Path('/home/user/stock_analysis/visualizations')
+        self.output_dir = Path('visualizations')
         self.output_dir.mkdir(parents=True, exist_ok=True)
         plt.rcParams['font.family'] = ['Noto Sans CJK JP']
         plt.rcParams['figure.dpi'] = 100
@@ -419,7 +419,7 @@ class DailyStockAnalysisAgent:
         self.setup_logging()
 
     def setup_logging(self):
-        logging.basicConfig(filename='/home/user/stock_analysis/analysis.log',
+        logging.basicConfig(filename='analysis.log',
                             level=logging.INFO,
                             format='%(asctime)s - %(levelname)s - %(message)s')
         logging.info("DailyStockAnalysisAgent initialized.")
