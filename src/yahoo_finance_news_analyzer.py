@@ -549,33 +549,36 @@ Keep the analysis concise but comprehensive.
     # ------------------------------------------------------------------
     # 복구용: run_complete_analysis
     # ------------------------------------------------------------------
+    # ------------------------------------------------------------------
+    # run_complete_analysis  :  CLI·Workflow 호환용 메서드
+    # ------------------------------------------------------------------
     def run_complete_analysis(self, tickers: List[str]) -> Dict:
         """
-        Collect, analyze, 그리고 결과 저장까지 한 번에 수행
-        (기존 스크립트 호환용 메서드)
+        Collect → Analyze → Save 까지 한 번에 실행
+        호출 예: analyzer.run_complete_analysis(["AAPL","MSFT"])
         """
         logging.info(f"Starting complete analysis for tickers: {tickers}")
 
         all_stock_data: List[Dict] = []
         all_analyses: List[Dict] = []
 
-        # 예상 비용 출력
+        # 예상 비용
         cost_estimate = estimate_api_cost(len(tickers))
         logging.info(
             f"Estimated API cost: ${cost_estimate['estimated_cost']:.2f}"
         )
 
         for i, ticker in enumerate(tickers, 1):
-            logging.info(f"[{i}/{len(tickers)}] {ticker} 수집·분석 시작")
+            logging.info(f"[{i}/{len(tickers)}] {ticker} collecting ...")
 
             stock_data = self.get_yahoo_finance_data(ticker)
             if "error" in stock_data:
-                logging.error(f"데이터 수집 실패: {ticker}")
+                logging.error(f"{ticker} data collection failed: {stock_data['error']}")
                 continue
 
             all_stock_data.append(stock_data)
 
-            # 차트
+            # 차트 생성
             if stock_data.get("price_history"):
                 price_df = pd.DataFrame(stock_data["price_history"])
                 if not price_df.empty:
@@ -586,7 +589,7 @@ Keep the analysis concise but comprehensive.
                     chart_path = self.create_stock_chart(ticker, price_df)
                     stock_data["chart_path"] = chart_path
 
-            # ChatGPT 분석
+            # GPT 분석
             analysis = self.analyze_with_chatgpt(stock_data)
             all_analyses.append(analysis)
 
@@ -609,7 +612,7 @@ Keep the analysis concise but comprehensive.
             },
         }
 
-        # 파일 저장
+        # 결과 저장
         self.save_analysis_results(results)
         logging.info("Complete analysis finished successfully")
         return results
