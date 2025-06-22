@@ -546,82 +546,74 @@ Keep the analysis concise but comprehensive.
             logging.error(f"Error generating portfolio analysis: {str(e)}")
             return {'error': str(e)}
     
+    # ------------------------------------------------------------------
+    # 복구용: run_complete_analysis
+    # ------------------------------------------------------------------
     def run_complete_analysis(self, tickers: List[str]) -> Dict:
         """
-        Run complete analysis pipeline for multiple stocks
-        
-        Args:
-            tickers: List of stock ticker symbols
-            
-        Returns:
-            Complete analysis results
+        Collect, analyze, 그리고 결과 저장까지 한 번에 수행
+        (기존 스크립트 호환용 메서드)
         """
         logging.info(f"Starting complete analysis for tickers: {tickers}")
-        
-        all_stock_data = []
-        all_analyses = []
-        
-        # Show cost estimation
+
+        all_stock_data: List[Dict] = []
+        all_analyses: List[Dict] = []
+
+        # 예상 비용 출력
         cost_estimate = estimate_api_cost(len(tickers))
-        logging.info(f"Estimated API cost: ${cost_estimate['estimated_cost']:.2f}")
-        
-        # Collect data and analyze each stock
+        logging.info(
+            f"Estimated API cost: ${cost_estimate['estimated_cost']:.2f}"
+        )
+
         for i, ticker in enumerate(tickers, 1):
-            logging.info(f"Processing {ticker} ({i}/{len(tickers)})...")
-            
-            # Get Yahoo Finance data
+            logging.info(f"[{i}/{len(tickers)}] {ticker} 수집·분석 시작")
+
             stock_data = self.get_yahoo_finance_data(ticker)
-            
-            if 'error' not in stock_data:
-                all_stock_data.append(stock_data)
-                
-                # Create technical chart
-                if stock_data.get('price_history'):
-                    price_df = pd.DataFrame(stock_data['price_history'])
-                    if not price_df.empty:
-                        # Set proper datetime index
-                        if 'Date' not in price_df.columns:
-                            price_df.reset_index(inplace=True)
-                        
-                        if 'Date' in price_df.columns:
-                            price_df['Date'] = pd.to_datetime(price_df['Date'])
-                            price_df.set_index('Date', inplace=True)
-                        
-                        chart_path = self.create_stock_chart(ticker, price_df)
-                        stock_data['chart_path'] = chart_path
-                
-                # Analyze with ChatGPT
-                analysis = self.analyze_with_chatgpt(stock_data)
-                all_analyses.append(analysis)
-                
-                # Rate limiting delay
-                time.sleep(settings.REQUEST_DELAY)
-            else:
-                logging.error(f"Failed to collect data for {ticker}")
-        
-        # Generate portfolio analysis
+            if "error" in stock_data:
+                logging.error(f"데이터 수집 실패: {ticker}")
+                continue
+
+            all_stock_data.append(stock_data)
+
+            # 차트
+            if stock_data.get("price_history"):
+                price_df = pd.DataFrame(stock_data["price_history"])
+                if not price_df.empty:
+                    if "Date" not in price_df.columns:
+                        price_df.reset_index(inplace=True)
+                    price_df["Date"] = pd.to_datetime(price_df["Date"])
+                    price_df.set_index("Date", inplace=True)
+                    chart_path = self.create_stock_chart(ticker, price_df)
+                    stock_data["chart_path"] = chart_path
+
+            # ChatGPT 분석
+            analysis = self.analyze_with_chatgpt(stock_data)
+            all_analyses.append(analysis)
+
+            time.sleep(settings.REQUEST_DELAY)
+
+        # 포트폴리오 분석
         portfolio_analysis = self.generate_portfolio_analysis(all_analyses)
-        
-        # Compile final results
+
         results = {
-            'analysis_timestamp': datetime.now().isoformat(),
-            'tickers_analyzed': tickers,
-            'individual_analyses': all_analyses,
-            'portfolio_analysis': portfolio_analysis,
-            'raw_stock_data': all_stock_data,
-            'cost_estimate': cost_estimate,
-            'summary': {
-                'total_stocks': len(tickers),
-                'successful_analyses': len(all_analyses),
-                'failed_analyses': len(tickers) - len(all_analyses)
-            }
+            "analysis_timestamp": datetime.now().isoformat(),
+            "tickers_analyzed": tickers,
+            "individual_analyses": all_analyses,
+            "portfolio_analysis": portfolio_analysis,
+            "raw_stock_data": all_stock_data,
+            "cost_estimate": cost_estimate,
+            "summary": {
+                "total_stocks": len(tickers),
+                "successful_analyses": len(all_analyses),
+                "failed_analyses": len(tickers) - len(all_analyses),
+            },
         }
-        
-        # Save results
+
+        # 파일 저장
         self.save_analysis_results(results)
-        
         logging.info("Complete analysis finished successfully")
         return results
+
     
     def save_analysis_results(self, results: Dict) -> str:
         """
