@@ -9,6 +9,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from openai import OpenAI
 import warnings
+from indicators import attach_indicators
+
 
 from .utils import (
     ensure_directories_exist, save_json, format_currency, 
