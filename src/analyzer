@@ -1,0 +1,2 @@
+# src/analyzer.py
+from .yahoo_finance_news_analyzer import YahooFinanceNewsAnalyzer
