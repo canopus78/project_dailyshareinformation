@@ -122,74 +122,48 @@ class YahooFinanceNewsAnalyzer:
             logging.error(f"Error collecting data for {ticker}: {str(e)}")
             return {'ticker': ticker, 'error': str(e)}
     
-    def calculate_technical_indicators(self, price_data: pd.DataFrame) -> Dict:
-        """
-        Calculate various technical indicators from price data
-        
-        Args:
-            price_data: DataFrame with OHLCV data
-            
-        Returns:
-            Dictionary containing technical indicators
-        """
-        if price_data.empty:
-            return {}
-        
-        try:
-            # Create a copy to avoid modifying original data
-            df = price_data.copy()
-            
-            # Simple Moving Averages
-            df['SMA_20'] = df['Close'].rolling(window=20).mean()
-            df['SMA_50'] = df['Close'].rolling(window=50).mean()
-            df['SMA_200'] = df['Close'].rolling(window=200).mean()
-            
-            # Exponential Moving Averages
-            df['EMA_12'] = df['Close'].ewm(span=12).mean()
-            df['EMA_26'] = df['Close'].ewm(span=26).mean()
-            
-            # MACD
-            df['MACD'] = df['EMA_12'] - df['EMA_26']
-            df['MACD_Signal'] = df['MACD'].ewm(span=9).mean()
-            df['MACD_Histogram'] = df['MACD'] - df['MACD_Signal']
-            
-            # RSI
-            delta = df['Close'].diff()
-            gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
-            loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
-            rs = gain / loss
-            df['RSI'] = 100 - (100 / (1 + rs))
-            
-            # Bollinger Bands
-            df['BB_Middle'] = df['Close'].rolling(window=20).mean()
-            bb_std = df['Close'].rolling(window=20).std()
-            df['BB_Upper'] = df['BB_Middle'] + (bb_std * 2)
-            df['BB_Lower'] = df['BB_Middle'] - (bb_std * 2)
-            
-            # Current values (using last available data)
-            current_price = df['Close'].iloc[-1]
-            
-            return {
-                'current_price': float(current_price),
-                'sma_20': float(df['SMA_20'].iloc[-1]) if not pd.isna(df['SMA_20'].iloc[-1]) else None,
-                'sma_50': float(df['SMA_50'].iloc[-1]) if not pd.isna(df['SMA_50'].iloc[-1]) else None,
-                'sma_200': float(df['SMA_200'].iloc[-1]) if not pd.isna(df['SMA_200'].iloc[-1]) else None,
-                'rsi': float(df['RSI'].iloc[-1]) if not pd.isna(df['RSI'].iloc[-1]) else None,
-                'macd': float(df['MACD'].iloc[-1]) if not pd.isna(df['MACD'].iloc[-1]) else None,
-                'macd_signal': float(df['MACD_Signal'].iloc[-1]) if not pd.isna(df['MACD_Signal'].iloc[-1]) else None,
-                'bb_upper': float(df['BB_Upper'].iloc[-1]) if not pd.isna(df['BB_Upper'].iloc[-1]) else None,
-                'bb_lower': float(df['BB_Lower'].iloc[-1]) if not pd.isna(df['BB_Lower'].iloc[-1]) else None,
-                'bb_position': self._calculate_bb_position(current_price, df['BB_Upper'].iloc[-1], df['BB_Lower'].iloc[-1]),
-                'price_vs_sma20': self._calculate_price_vs_ma(current_price, df['SMA_20'].iloc[-1]),
-                'price_vs_sma50': self._calculate_price_vs_ma(current_price, df['SMA_50'].iloc[-1]),
-                'volume_avg': float(df['Volume'].tail(20).mean()),
-                'volume_current': float(df['Volume'].iloc[-1]),
-                'volatility': float(df['Close'].pct_change().tail(20).std() * np.sqrt(252) * 100)
-            }
-            
-        except Exception as e:
-            logging.error(f"Error calculating technical indicators: {str(e)}")
-            return {}
+def calculate_technical_indicators(self, price_data: pd.DataFrame) -> Dict:
+    """
+    pandas-ta 로 계산된 최신 지표 스냅샷 반환
+    """
+    if price_data.empty:
+        return {}
+
+    # 1) pandas-ta 지표 추가
+    df = attach_indicators(price_data)
+
+    # 2) 마지막 행 한 번만 읽어 반환값 구성
+    last = df.iloc[-1]
+
+    # helper(lambda) 로 NaN → None 처리
+    to_float = lambda x: float(x) if pd.notna(x) else None
+
+    return {
+        "current_price": to_float(last["Close"]),
+        "sma_20": to_float(last["SMA_20"]),
+        "sma_50": to_float(last["SMA_50"]),
+        "sma_200": to_float(last["SMA_200"]),
+        "rsi": to_float(last["RSI_14"]),
+        "macd": to_float(last["MACD_12_26_9"]),
+        "macd_signal": to_float(last["MACDs_12_26_9"]),
+        "bb_upper": to_float(last["BBU_20_2.0"]),
+        "bb_lower": to_float(last["BBL_20_2.0"]),
+        "bb_position": to_float(last["BB_POS"]),
+        "price_vs_sma20": (
+            (last["Close"] - last["SMA_20"]) / last["SMA_20"] * 100
+            if pd.notna(last["SMA_20"])
+            else None
+        ),
+        "price_vs_sma50": (
+            (last["Close"] - last["SMA_50"]) / last["SMA_50"] * 100
+            if pd.notna(last["SMA_50"])
+            else None
+        ),
+        "volatility": to_float(last["VOLATILITY_20d"]),
+        "volume_avg": to_float(df["Volume"].tail(20).mean()),
+        "volume_current": to_float(last["Volume"]),
+    }
+
     
     def _calculate_bb_position(self, price: float, bb_upper: float, bb_lower: float) -> Optional[float]:
         """Calculate Bollinger Band position (0-1 scale)"""
@@ -284,46 +258,16 @@ class YahooFinanceNewsAnalyzer:
             logging.error(f"Error creating chart for {ticker}: {str(e)}")
             return ""
     
-    def add_indicators_to_dataframe(self, df: pd.DataFrame) -> pd.DataFrame:
-        """
-        Add technical indicators to price dataframe for charting
-        
-        Args:
-            df: DataFrame with OHLCV data
-            
-        Returns:
-            DataFrame with added indicators
-        """
-        try:
-            # Moving Averages
-            df['SMA_20'] = df['Close'].rolling(window=20).mean()
-            df['SMA_50'] = df['Close'].rolling(window=50).mean()
-            
-            # Bollinger Bands
-            df['BB_Middle'] = df['Close'].rolling(window=20).mean()
-            bb_std = df['Close'].rolling(window=20).std()
-            df['BB_Upper'] = df['BB_Middle'] + (bb_std * 2)
-            df['BB_Lower'] = df['BB_Middle'] - (bb_std * 2)
-            
-            # RSI
-            delta = df['Close'].diff()
-            gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
-            loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
-            rs = gain / loss
-            df['RSI'] = 100 - (100 / (1 + rs))
-            
-            # MACD
-            df['EMA_12'] = df['Close'].ewm(span=12).mean()
-            df['EMA_26'] = df['Close'].ewm(span=26).mean()
-            df['MACD'] = df['EMA_12'] - df['EMA_26']
-            df['MACD_Signal'] = df['MACD'].ewm(span=9).mean()
-            df['MACD_Histogram'] = df['MACD'] - df['MACD_Signal']
-            
-            return df
-            
-        except Exception as e:
-            logging.error(f"Error adding indicators: {str(e)}")
-            return df
+def add_indicators_to_dataframe(self, df: pd.DataFrame) -> pd.DataFrame:
+    """
+    pandas-ta 로 지표를 추가한 DataFrame 반환
+    """
+    try:
+        return attach_indicators(df)
+    except Exception as e:
+        logging.error(f"Error adding indicators: {str(e)}")
+        return df
+
     
     def analyze_with_chatgpt(self, stock_data: Dict) -> Dict:
         """
