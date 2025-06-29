@@ -1,40 +1,40 @@
-name: Daily Stock Analysis
+# name: Daily Stock Analysis
 
-# cache clear comment
+# # cache clear comment
 
-on:
-  schedule:
-    - cron: '0 0 * * *' # 매일 자정(UTC)에 실행
-  workflow_dispatch: # 수동 실행 기능
+# on:
+#   schedule:
+#     - cron: '0 0 * * *' # 매일 자정(UTC)에 실행
+#   workflow_dispatch: # 수동 실행 기능
 
-jobs:
-  stock-analysis:
-    runs-on: ubuntu-latest
+# jobs:
+#   stock-analysis:
+#     runs-on: ubuntu-latest
     
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v3
     
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
+#     - name: Set up Python
+#       uses: actions/setup-python@v4
+#       with:
+#         python-version: '3.9'
     
-    - name: Install dependencies
-      run: |
-        pip install pandas numpy matplotlib
-        # yfinance, seaborn, requests 등은 현재 코드에서 사용되지 않으므로 제외했습니다.
-        # 필요 시 다시 추가하세요.
+#     - name: Install dependencies
+#       run: |
+#         pip install pandas numpy matplotlib
+#         # yfinance, seaborn, requests 등은 현재 코드에서 사용되지 않으므로 제외했습니다.
+#         # 필요 시 다시 추가하세요.
         
-    - name: Install Korean font for Matplotlib
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y fonts-nanum*
+#     - name: Install Korean font for Matplotlib
+#       run: |
+#         sudo apt-get update
+#         sudo apt-get install -y fonts-nanum*
         
-    - name: Run daily stock analysis
-      env:
-        GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
-        GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
-        RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
-      run: |
-        python3 daily_stock_analysis_agent.py
+#     - name: Run daily stock analysis
+#       env:
+#         GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+#         GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
+#         RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
+#       run: |
+#         python3 daily_stock_analysis_agent.py
